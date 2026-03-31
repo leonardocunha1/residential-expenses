@@ -7,6 +7,6 @@ public class Person
     public int Age { get; set; }
 
     // Navigation properties
-    public ICollection<UserPerson> UserPeople { get; set; } = [];
+    public ICollection<User> Users { get; set; } = [];
     public ICollection<Transaction> Transactions { get; set; } = [];
 }

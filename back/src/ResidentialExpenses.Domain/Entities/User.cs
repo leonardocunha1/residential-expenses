@@ -9,6 +9,6 @@ public class User
     public DateTime CreatedAt { get; set; }
 
     // Navigation properties
-    public ICollection<UserPerson> UserPeople { get; set; } = [];
+    public ICollection<Person> People { get; set; } = [];
 
 }
