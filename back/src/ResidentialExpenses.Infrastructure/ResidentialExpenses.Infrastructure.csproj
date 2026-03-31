@@ -10,4 +10,8 @@
     <ProjectReference Include="..\ResidentialExpenses.Domain\ResidentialExpenses.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataAccess\Repositories\" />
+  </ItemGroup>
+
 </Project>
