@@ -1,0 +1,22 @@
+services:
+  postgresql:
+    image: bitnami/postgresql
+    container_name: residentialexpenses-db
+    restart: unless-stopped
+    ports:
+      - '${POSTGRESQL_PORT}:5432'
+    environment:
+      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+    volumes:
+      - postgresql_data:/bitnami/postgresql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgresql_data:
