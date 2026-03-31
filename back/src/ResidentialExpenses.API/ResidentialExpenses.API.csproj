@@ -14,4 +14,11 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ResidentialExpenses.Application\ResidentialExpenses.Application.csproj" />
+    <ProjectReference Include="..\ResidentialExpenses.Communication\ResidentialExpenses.Communication.csproj" />
+    <ProjectReference Include="..\ResidentialExpenses.Exceptions\ResidentialExpenses.Exceptions.csproj" />
+    <ProjectReference Include="..\ResidentialExpenses.Infrastructure\ResidentialExpenses.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

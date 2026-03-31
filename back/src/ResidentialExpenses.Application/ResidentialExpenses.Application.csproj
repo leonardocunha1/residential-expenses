@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ResidentialExpenses.Communication\ResidentialExpenses.Communication.csproj" />
+    <ProjectReference Include="..\ResidentialExpenses.Domain\ResidentialExpenses.Domain.csproj" />
+    <ProjectReference Include="..\ResidentialExpenses.Exceptions\ResidentialExpenses.Exceptions.csproj" />
+  </ItemGroup>
+
 </Project>

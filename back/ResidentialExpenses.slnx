@@ -2,9 +2,13 @@
   <Folder Name="/src/">
     <Project Path="src/ResidentialExpenses.API/ResidentialExpenses.API.csproj" Id="08fb01fd-702a-49cc-a225-8b6c00300949" />
     <Project Path="src/ResidentialExpenses.Application/ResidentialExpenses.Application.csproj" Id="005d5f55-95f7-421a-980e-1107bb374584" />
-    <Project Path="src/ResidentialExpenses.Communication/ResidentialExpenses.Communication.csproj" Id="c17135a0-c43d-4dca-9bd4-6fe8a699b752" />
+    <Project Path="src/ResidentialExpenses.Communication/ResidentialExpenses.Communication.csproj" Id="c17135a0-c43d-4dca-9bd4-6fe8a699b752">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
     <Project Path="src/ResidentialExpenses.Domain/ResidentialExpenses.Domain.csproj" Id="767241b7-0d90-4302-9c86-4ae7522f4927" />
-    <Project Path="src/ResidentialExpenses.Exceptions/ResidentialExpenses.Exceptions.csproj" Id="387a7415-4af0-4da7-9cab-9219d8e1f0fb" />
+    <Project Path="src/ResidentialExpenses.Exceptions/ResidentialExpenses.Exceptions.csproj" Id="387a7415-4af0-4da7-9cab-9219d8e1f0fb">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
     <Project Path="src/ResidentialExpenses.Infrastructure/ResidentialExpenses.Infrastructure.csproj" Id="1d23fa2e-1474-42e4-a23b-9b4c92b4d944" />
   </Folder>
   <Folder Name="/tests/">
