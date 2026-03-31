@@ -1,4 +1,5 @@
 using ResidentialExpenses.Infrastructure;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
