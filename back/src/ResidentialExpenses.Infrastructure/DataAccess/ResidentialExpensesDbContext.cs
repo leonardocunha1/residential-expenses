@@ -25,7 +25,7 @@ public class ResidentialExpensesDbContext : DbContext
             e.Property(x => x.Email).IsRequired().HasMaxLength(200);
             e.HasIndex(x => x.Email).IsUnique();
             e.Property(x => x.Password).IsRequired();
-            e.Property(x => x.CreatedAt).HasDefaultValueSql("NOW()");
+            e.Property(x => x.CreatedAt).HasDefaultValueSql("now() at time zone 'utc'");
 
             e.HasMany(x => x.People)
              .WithMany(x => x.Users)

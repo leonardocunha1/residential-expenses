@@ -41,6 +41,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
         var user = _mapper.Map<Domain.Entities.User>(request);
         user.Password = _passwordEncripter.Encrypt(request.Password);
+        user.CreatedAt = DateTime.UtcNow;
 
         await _writeOnlyRepository.Add(user);
 
