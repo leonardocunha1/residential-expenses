@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ResidentialExpenses.Application.UseCases.Users.Delete;
 using ResidentialExpenses.Application.UseCases.Users.Login;
 using ResidentialExpenses.Application.UseCases.Users.Register;
+using ResidentialExpenses.Application.UseCases.Users.Update;
 using Microsoft.Extensions.Configuration;
 using ResidentialExpenses.Application.Services.AutoMapper;
 
@@ -39,5 +41,7 @@ public static class DependencyInjectionExtension
     {
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+        services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+        services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
     }
 }

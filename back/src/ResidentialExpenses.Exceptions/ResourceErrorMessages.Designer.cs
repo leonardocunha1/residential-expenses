@@ -149,5 +149,14 @@ namespace ResidentialExpenses.Exceptions {
                 return ResourceManager.GetString("USER_WITHOUT_PERMISSION_ACCESS_RESOURCE", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to A senha atual está incorreta..
+        /// </summary>
+        public static string OLD_PASSWORD_INCORRECT {
+            get {
+                return ResourceManager.GetString("OLD_PASSWORD_INCORRECT", resourceCulture);
+            }
+        }
     }
 }
