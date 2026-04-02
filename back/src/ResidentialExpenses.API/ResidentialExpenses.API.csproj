@@ -8,10 +8,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Scalar.AspNetCore" Version="2.13.18" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\ResidentialExpenses.Application\ResidentialExpenses.Application.csproj" />
+    <ProjectReference Include="..\ResidentialExpenses.Communication\ResidentialExpenses.Communication.csproj" />
+    <ProjectReference Include="..\ResidentialExpenses.Exceptions\ResidentialExpenses.Exceptions.csproj" />
+    <ProjectReference Include="..\ResidentialExpenses.Infrastructure\ResidentialExpenses.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

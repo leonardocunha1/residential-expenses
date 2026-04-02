@@ -6,6 +6,12 @@
 # dotenv files
 .env
 
+# Claude Code
+.claude/
+.claude_project
+.devflow/
+docs/
+
 # User-specific files
 *.rsuser
 *.suo
@@ -157,7 +163,7 @@ coverage*.info
 
 # Visual Studio code coverage results
 *.coverage
-*.coveragexml
+*.coveragml
 
 # NCrunch
 _NCrunch_*
@@ -483,7 +489,6 @@ $RECYCLE.BIN/
 
 # Environment Configs
 .env
-.env.*
 
 # Node.js / Future Frontend
 node_modules/
