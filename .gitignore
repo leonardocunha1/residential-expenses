@@ -8,6 +8,9 @@
 
 # Claude Code
 .claude/
+.claude_project
+.devflow/
+docs/
 
 # User-specific files
 *.rsuser
