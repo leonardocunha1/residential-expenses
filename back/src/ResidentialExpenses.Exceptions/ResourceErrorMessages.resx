@@ -138,4 +138,13 @@
   <data name="UNKNOW_ERROR" xml:space="preserve">
     <value>Erro desconhecido.</value>
   </data>
+  <data name="NO_TOKEN" xml:space="preserve">
+    <value>Token de autenticação não fornecido.</value>
+  </data>
+  <data name="TOKEN_EXPIRED" xml:space="preserve">
+    <value>Token de autenticação expirado.</value>
+  </data>
+  <data name="USER_WITHOUT_PERMISSION_ACCESS_RESOURCE" xml:space="preserve">
+    <value>Sem permissão para acessar este recurso.</value>
+  </data>
 </root>

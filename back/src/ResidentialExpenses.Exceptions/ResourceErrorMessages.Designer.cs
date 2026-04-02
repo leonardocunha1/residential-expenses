@@ -122,5 +122,32 @@ namespace ResidentialExpenses.Exceptions {
                 return ResourceManager.GetString("UNKNOW_ERROR", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Token de autenticação não fornecido..
+        /// </summary>
+        public static string NO_TOKEN {
+            get {
+                return ResourceManager.GetString("NO_TOKEN", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Token de autenticação expirado..
+        /// </summary>
+        public static string TOKEN_EXPIRED {
+            get {
+                return ResourceManager.GetString("TOKEN_EXPIRED", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Sem permissão para acessar este recurso..
+        /// </summary>
+        public static string USER_WITHOUT_PERMISSION_ACCESS_RESOURCE {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSION_ACCESS_RESOURCE", resourceCulture);
+            }
+        }
     }
 }
