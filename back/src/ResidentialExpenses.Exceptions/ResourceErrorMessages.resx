@@ -150,4 +150,37 @@
   <data name="OLD_PASSWORD_INCORRECT" xml:space="preserve">
     <value>A senha atual está incorreta.</value>
   </data>
+  <data name="PERSON_NAME_EMPTY" xml:space="preserve">
+    <value>O nome da pessoa não pode ser vazio.</value>
+  </data>
+  <data name="PERSON_AGE_INVALID" xml:space="preserve">
+    <value>A idade deve ser maior que zero.</value>
+  </data>
+  <data name="PERSON_NOT_FOUND" xml:space="preserve">
+    <value>Pessoa não encontrada.</value>
+  </data>
+  <data name="CATEGORY_DESCRIPTION_EMPTY" xml:space="preserve">
+    <value>A descrição da categoria não pode ser vazia.</value>
+  </data>
+  <data name="CATEGORY_PURPOSE_INVALID" xml:space="preserve">
+    <value>A finalidade da categoria é inválida.</value>
+  </data>
+  <data name="TRANSACTION_DESCRIPTION_EMPTY" xml:space="preserve">
+    <value>A descrição da transação não pode ser vazia.</value>
+  </data>
+  <data name="TRANSACTION_VALUE_MUST_BE_POSITIVE" xml:space="preserve">
+    <value>O valor da transação deve ser maior que zero.</value>
+  </data>
+  <data name="TRANSACTION_TYPE_INVALID" xml:space="preserve">
+    <value>O tipo da transação é inválido.</value>
+  </data>
+  <data name="TRANSACTION_CATEGORY_NOT_FOUND" xml:space="preserve">
+    <value>Categoria não encontrada.</value>
+  </data>
+  <data name="TRANSACTION_CATEGORY_PURPOSE_MISMATCH" xml:space="preserve">
+    <value>A categoria informada não é compatível com o tipo da transação.</value>
+  </data>
+  <data name="TRANSACTION_MINOR_ONLY_EXPENSE" xml:space="preserve">
+    <value>Menores de 18 anos só podem ter transações do tipo despesa.</value>
+  </data>
 </root>

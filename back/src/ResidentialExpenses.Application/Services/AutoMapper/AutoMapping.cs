@@ -18,10 +18,21 @@ public class AutoMapping : Profile
     {
         CreateMap<RequestRegisterUserJson, User>()
             .ForMember(dest => dest.Password, opt => opt.Ignore());
+
+        CreateMap<RequestRegisterPersonJson, Person>();
+        CreateMap<RequestUpdatePersonJson, Person>();
+        CreateMap<RequestRegisterCategoryJson, Category>();
+        CreateMap<RequestRegisterTransactionJson, Transaction>();
     }
 
     private void DomainToResponse()
     {
         CreateMap<User, ResponseUserProfileJson>();
+        CreateMap<Person, ResponseRegisteredPersonJson>();
+        CreateMap<Person, ResponseShortPersonJson>();
+        CreateMap<Category, ResponseRegisteredCategoryJson>();
+        CreateMap<Category, ResponseShortCategoryJson>();
+        CreateMap<Transaction, ResponseRegisteredTransactionJson>();
+        CreateMap<Transaction, ResponseShortTransactionJson>();
     }
 }
