@@ -147,4 +147,7 @@
   <data name="USER_WITHOUT_PERMISSION_ACCESS_RESOURCE" xml:space="preserve">
     <value>Sem permissão para acessar este recurso.</value>
   </data>
+  <data name="OLD_PASSWORD_INCORRECT" xml:space="preserve">
+    <value>A senha atual está incorreta.</value>
+  </data>
 </root>

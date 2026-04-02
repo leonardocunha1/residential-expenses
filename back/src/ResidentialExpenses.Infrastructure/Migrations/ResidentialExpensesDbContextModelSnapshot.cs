@@ -55,7 +55,7 @@ namespace ResidentialExpenses.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("ResidentialExpenses.Domain.Entities.Person", b =>
@@ -76,7 +76,7 @@ namespace ResidentialExpenses.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("People");
+                    b.ToTable("People", (string)null);
                 });
 
             modelBuilder.Entity("ResidentialExpenses.Domain.Entities.Transaction", b =>
@@ -110,7 +110,7 @@ namespace ResidentialExpenses.Infrastructure.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("Transactions");
+                    b.ToTable("Transactions", (string)null);
                 });
 
             modelBuilder.Entity("ResidentialExpenses.Domain.Entities.User", b =>
@@ -145,7 +145,7 @@ namespace ResidentialExpenses.Infrastructure.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("PersonUser", b =>
