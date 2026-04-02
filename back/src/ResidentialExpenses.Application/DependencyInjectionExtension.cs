@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ResidentialExpenses.Application.UseCases.Users.Login;
 using ResidentialExpenses.Application.UseCases.Users.Register;
 using Microsoft.Extensions.Configuration;
 using ResidentialExpenses.Application.Services.AutoMapper;
@@ -37,5 +38,6 @@ public static class DependencyInjectionExtension
     private static void AddUseCases(IServiceCollection services)
     {
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+        services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
     }
 }
