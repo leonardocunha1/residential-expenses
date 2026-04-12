@@ -8,24 +8,32 @@ import * as zod from 'zod';
 
 
 export const ValidatepostApiPersonBody = zod.object({
-  "name": zod.string().optional(),
-  "age": zod.number().optional()
+  "name": zod.string(),
+  "age": zod.number()
 })
 
-export const ValidategetApiPersonResponseItem = zod.object({
+export const ValidategetApiPersonResponse = zod.object({
+  "success": zod.boolean().optional(),
+  "data": zod.array(zod.object({
   "id": zod.number().optional(),
   "name": zod.string().optional(),
   "age": zod.number().optional()
+})).nullish(),
+  "errors": zod.array(zod.string()).optional(),
+  "metadata": zod.object({
+  "page": zod.number().nullish(),
+  "pageSize": zod.number().nullish(),
+  "totalCount": zod.number().nullish()
+}).optional()
 })
-export const ValidategetApiPersonResponse = zod.array(ValidategetApiPersonResponseItem)
 
 export const ValidateputApiPersonIdParams = zod.object({
   "id": zod.number()
 })
 
 export const ValidateputApiPersonIdBody = zod.object({
-  "name": zod.string().optional(),
-  "age": zod.number().optional()
+  "name": zod.string(),
+  "age": zod.number()
 })
 
 export const ValidatedeleteApiPersonIdParams = zod.object({

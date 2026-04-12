@@ -6,8 +6,8 @@
  */
 
 export interface RequestUpdateUserJson {
-  name?: string;
-  email?: string;
+  name: string;
+  email: string;
   oldPassword?: string;
   newPassword?: string;
 }

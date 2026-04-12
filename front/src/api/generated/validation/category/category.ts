@@ -8,14 +8,22 @@ import * as zod from 'zod';
 
 
 export const ValidatepostApiCategoryBody = zod.object({
-  "description": zod.string().optional(),
-  "purpose": zod.number().optional()
+  "description": zod.string(),
+  "purpose": zod.number()
 })
 
-export const ValidategetApiCategoryResponseItem = zod.object({
+export const ValidategetApiCategoryResponse = zod.object({
+  "success": zod.boolean().optional(),
+  "data": zod.array(zod.object({
   "id": zod.number().optional(),
   "description": zod.string().optional(),
   "purpose": zod.number().optional()
+})).nullish(),
+  "errors": zod.array(zod.string()).optional(),
+  "metadata": zod.object({
+  "page": zod.number().nullish(),
+  "pageSize": zod.number().nullish(),
+  "totalCount": zod.number().nullish()
+}).optional()
 })
-export const ValidategetApiCategoryResponse = zod.array(ValidategetApiCategoryResponseItem)
 

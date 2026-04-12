@@ -8,28 +8,38 @@ import * as zod from 'zod';
 
 
 export const ValidatepostApiTransactionBody = zod.object({
-  "description": zod.string().optional(),
-  "value": zod.number().optional(),
-  "type": zod.number().optional(),
-  "categoryId": zod.number().optional(),
-  "personId": zod.number().optional()
+  "description": zod.string(),
+  "value": zod.number(),
+  "type": zod.number(),
+  "categoryId": zod.number(),
+  "personId": zod.number()
 })
 
 export const ValidategetApiTransactionPersonPersonIdParams = zod.object({
   "personId": zod.number()
 })
 
-export const ValidategetApiTransactionPersonPersonIdResponseItem = zod.object({
+export const ValidategetApiTransactionPersonPersonIdResponse = zod.object({
+  "success": zod.boolean().optional(),
+  "data": zod.array(zod.object({
   "id": zod.number().optional(),
   "description": zod.string().optional(),
   "value": zod.number().optional(),
   "type": zod.number().optional(),
   "categoryId": zod.number().optional(),
   "personId": zod.number().optional()
+})).nullish(),
+  "errors": zod.array(zod.string()).optional(),
+  "metadata": zod.object({
+  "page": zod.number().nullish(),
+  "pageSize": zod.number().nullish(),
+  "totalCount": zod.number().nullish()
+}).optional()
 })
-export const ValidategetApiTransactionPersonPersonIdResponse = zod.array(ValidategetApiTransactionPersonPersonIdResponseItem)
 
 export const ValidategetApiTransactionTotalsResponse = zod.object({
+  "success": zod.boolean().optional(),
+  "data": zod.object({
   "people": zod.array(zod.object({
   "personId": zod.number().optional(),
   "personName": zod.string().optional(),
@@ -40,5 +50,12 @@ export const ValidategetApiTransactionTotalsResponse = zod.object({
   "totalIncome": zod.number().optional(),
   "totalExpense": zod.number().optional(),
   "balance": zod.number().optional()
+}).nullish(),
+  "errors": zod.array(zod.string()).optional(),
+  "metadata": zod.object({
+  "page": zod.number().nullish(),
+  "pageSize": zod.number().nullish(),
+  "totalCount": zod.number().nullish()
+}).optional()
 })
 

@@ -6,11 +6,14 @@
  */
 import type { TransactionTypeJson } from './transactionTypeJson';
 
-export interface ResponseRegisteredTransactionJson {
+/**
+ * @nullable
+ */
+export type ResponseRegisteredTransactionJson = {
   id?: number;
   description?: string;
   value?: number;
   type?: TransactionTypeJson;
   categoryId?: number;
   personId?: number;
-}
+} | null;

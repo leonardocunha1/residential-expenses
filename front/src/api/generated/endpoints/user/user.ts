@@ -5,20 +5,35 @@
  * OpenAPI spec version: 1.0.0
  */
 import {
-  useMutation
+  useInfiniteQuery,
+  useMutation,
+  useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseInfiniteQueryResult,
+  DefinedUseQueryResult,
+  InfiniteData,
   MutationFunction,
   QueryClient,
+  QueryFunction,
+  QueryKey,
+  UndefinedInitialDataOptions,
+  UseInfiniteQueryOptions,
+  UseInfiniteQueryResult,
   UseMutationOptions,
-  UseMutationResult
+  UseMutationResult,
+  UseQueryOptions,
+  UseQueryResult
 } from '@tanstack/react-query';
 
 import type {
   RequestRegisterUserJson,
   RequestUpdateUserJson,
-  ResponseErrorJson,
-  ResponseRegisteredUserJson
+  ResponseApiJsonOfObject,
+  ResponseApiJsonOfResponseRegisteredUserJson,
+  ResponseApiJsonOfResponseUserProfileJson
 } from '../../models';
 
 import { axiosInstance } from '../../../http/axios-instance';
@@ -28,28 +43,6 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
 
-export type postApiUserResponse201TextPlain = {
-  data: ResponseRegisteredUserJson
-  status: 201
-}
-
-export type postApiUserResponse201ApplicationJson = {
-  data: ResponseRegisteredUserJson
-  status: 201
-}
-
-export type postApiUserResponse201TextJson = {
-  data: ResponseRegisteredUserJson
-  status: 201
-}
-
-export type postApiUserResponseSuccess = (postApiUserResponse201TextPlain | postApiUserResponse201ApplicationJson | postApiUserResponse201TextJson) & {
-  headers: Headers;
-};
-;
-
-export type postApiUserResponse = (postApiUserResponseSuccess)
-
 export const getPostApiUserUrl = () => {
 
 
@@ -58,9 +51,9 @@ export const getPostApiUserUrl = () => {
   return `/api/user`
 }
 
-export const postApiUser = async (requestRegisterUserJson: RequestRegisterUserJson, options?: RequestInit): Promise<postApiUserResponse> => {
+export const postApiUser = async (requestRegisterUserJson: RequestRegisterUserJson, options?: RequestInit): Promise<ResponseApiJsonOfResponseRegisteredUserJson> => {
 
-  return axiosInstance<postApiUserResponse>(getPostApiUserUrl(),
+  return axiosInstance<ResponseApiJsonOfResponseRegisteredUserJson>(getPostApiUserUrl(),
   {
     ...options,
     method: 'POST',
@@ -114,49 +107,165 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPostApiUserMutationOptions(options), queryClient);
     }
-    export type putApiUserResponse204 = {
-  data: void
-  status: 204
+    export const getGetApiUserUrl = () => {
+
+
+
+
+  return `/api/user`
 }
 
-export type putApiUserResponse400TextPlain = {
-  data: ResponseErrorJson
-  status: 400
+export const getApiUser = async ( options?: RequestInit): Promise<ResponseApiJsonOfResponseUserProfileJson> => {
+
+  return axiosInstance<ResponseApiJsonOfResponseUserProfileJson>(getGetApiUserUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetApiUserInfiniteQueryKey = () => {
+    return [
+    'infinite', `/api/user`
+    ] as const;
+    }
+
+export const getGetApiUserQueryKey = () => {
+    return [
+    `/api/user`
+    ] as const;
+    }
+
+
+export const getGetApiUserInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getApiUser>>>, TError = unknown>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetApiUserInfiniteQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiUser>>> = ({ signal }) => getApiUser({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
-export type putApiUserResponse400ApplicationJson = {
-  data: ResponseErrorJson
-  status: 400
+export type GetApiUserInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getApiUser>>>
+export type GetApiUserInfiniteQueryError = unknown
+
+
+export function useGetApiUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiUser>>>, TError = unknown>(
+  options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiUser>>,
+          TError,
+          Awaited<ReturnType<typeof getApiUser>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof axiosInstance>}
+ , queryClient?: QueryClient
+  ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetApiUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiUser>>>, TError = unknown>(
+  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiUser>>,
+          TError,
+          Awaited<ReturnType<typeof getApiUser>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof axiosInstance>}
+ , queryClient?: QueryClient
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetApiUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiUser>>>, TError = unknown>(
+  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
+ , queryClient?: QueryClient
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+export function useGetApiUserInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiUser>>>, TError = unknown>(
+  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
+ , queryClient?: QueryClient
+ ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetApiUserInfiniteQueryOptions(options)
+
+  const query = useInfiniteQuery(queryOptions, queryClient) as  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return { ...query, queryKey: queryOptions.queryKey };
 }
 
-export type putApiUserResponse400TextJson = {
-  data: ResponseErrorJson
-  status: 400
+
+
+
+export const getGetApiUserQueryOptions = <TData = Awaited<ReturnType<typeof getApiUser>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetApiUserQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiUser>>> = ({ signal }) => getApiUser({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
-export type putApiUserResponse401TextPlain = {
-  data: ResponseErrorJson
-  status: 401
+export type GetApiUserQueryResult = NonNullable<Awaited<ReturnType<typeof getApiUser>>>
+export type GetApiUserQueryError = unknown
+
+
+export function useGetApiUser<TData = Awaited<ReturnType<typeof getApiUser>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiUser>>,
+          TError,
+          Awaited<ReturnType<typeof getApiUser>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof axiosInstance>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetApiUser<TData = Awaited<ReturnType<typeof getApiUser>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiUser>>,
+          TError,
+          Awaited<ReturnType<typeof getApiUser>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof axiosInstance>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetApiUser<TData = Awaited<ReturnType<typeof getApiUser>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+export function useGetApiUser<TData = Awaited<ReturnType<typeof getApiUser>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiUser>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetApiUserQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return { ...query, queryKey: queryOptions.queryKey };
 }
 
-export type putApiUserResponse401ApplicationJson = {
-  data: ResponseErrorJson
-  status: 401
-}
 
-export type putApiUserResponse401TextJson = {
-  data: ResponseErrorJson
-  status: 401
-}
 
-export type putApiUserResponseSuccess = (putApiUserResponse204) & {
-  headers: Headers;
-};
-export type putApiUserResponseError = (putApiUserResponse400TextPlain | putApiUserResponse400ApplicationJson | putApiUserResponse400TextJson | putApiUserResponse401TextPlain | putApiUserResponse401ApplicationJson | putApiUserResponse401TextJson) & {
-  headers: Headers;
-};
-
-export type putApiUserResponse = (putApiUserResponseSuccess | putApiUserResponseError)
 
 export const getPutApiUserUrl = () => {
 
@@ -166,9 +275,9 @@ export const getPutApiUserUrl = () => {
   return `/api/user`
 }
 
-export const putApiUser = async (requestUpdateUserJson: RequestUpdateUserJson, options?: RequestInit): Promise<putApiUserResponse> => {
+export const putApiUser = async (requestUpdateUserJson: RequestUpdateUserJson, options?: RequestInit): Promise<ResponseApiJsonOfResponseUserProfileJson> => {
 
-  return axiosInstance<putApiUserResponse>(getPutApiUserUrl(),
+  return axiosInstance<ResponseApiJsonOfResponseUserProfileJson>(getPutApiUserUrl(),
   {
     ...options,
     method: 'PUT',
@@ -181,7 +290,7 @@ export const putApiUser = async (requestUpdateUserJson: RequestUpdateUserJson, o
 
 
 
-export const getPutApiUserMutationOptions = <TError = ResponseErrorJson,
+export const getPutApiUserMutationOptions = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putApiUser>>, TError,{data: RequestUpdateUserJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof putApiUser>>, TError,{data: RequestUpdateUserJson}, TContext> => {
 
@@ -210,9 +319,9 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type PutApiUserMutationResult = NonNullable<Awaited<ReturnType<typeof putApiUser>>>
     export type PutApiUserMutationBody = RequestUpdateUserJson
-    export type PutApiUserMutationError = ResponseErrorJson
+    export type PutApiUserMutationError = ResponseApiJsonOfObject
 
-    export const usePutApiUser = <TError = ResponseErrorJson,
+    export const usePutApiUser = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putApiUser>>, TError,{data: RequestUpdateUserJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof putApiUser>>,
@@ -222,36 +331,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPutApiUserMutationOptions(options), queryClient);
     }
-    export type deleteApiUserResponse204 = {
-  data: void
-  status: 204
-}
-
-export type deleteApiUserResponse401TextPlain = {
-  data: ResponseErrorJson
-  status: 401
-}
-
-export type deleteApiUserResponse401ApplicationJson = {
-  data: ResponseErrorJson
-  status: 401
-}
-
-export type deleteApiUserResponse401TextJson = {
-  data: ResponseErrorJson
-  status: 401
-}
-
-export type deleteApiUserResponseSuccess = (deleteApiUserResponse204) & {
-  headers: Headers;
-};
-export type deleteApiUserResponseError = (deleteApiUserResponse401TextPlain | deleteApiUserResponse401ApplicationJson | deleteApiUserResponse401TextJson) & {
-  headers: Headers;
-};
-
-export type deleteApiUserResponse = (deleteApiUserResponseSuccess | deleteApiUserResponseError)
-
-export const getDeleteApiUserUrl = () => {
+    export const getDeleteApiUserUrl = () => {
 
 
 
@@ -259,9 +339,9 @@ export const getDeleteApiUserUrl = () => {
   return `/api/user`
 }
 
-export const deleteApiUser = async ( options?: RequestInit): Promise<deleteApiUserResponse> => {
+export const deleteApiUser = async ( options?: RequestInit): Promise<void> => {
 
-  return axiosInstance<deleteApiUserResponse>(getDeleteApiUserUrl(),
+  return axiosInstance<void>(getDeleteApiUserUrl(),
   {
     ...options,
     method: 'DELETE'
@@ -273,7 +353,7 @@ export const deleteApiUser = async ( options?: RequestInit): Promise<deleteApiUs
 
 
 
-export const getDeleteApiUserMutationOptions = <TError = ResponseErrorJson,
+export const getDeleteApiUserMutationOptions = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteApiUser>>, TError,void, TContext>, request?: SecondParameter<typeof axiosInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof deleteApiUser>>, TError,void, TContext> => {
 
@@ -302,9 +382,9 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type DeleteApiUserMutationResult = NonNullable<Awaited<ReturnType<typeof deleteApiUser>>>
 
-    export type DeleteApiUserMutationError = ResponseErrorJson
+    export type DeleteApiUserMutationError = ResponseApiJsonOfObject
 
-    export const useDeleteApiUser = <TError = ResponseErrorJson,
+    export const useDeleteApiUser = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteApiUser>>, TError,void, TContext>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteApiUser>>,

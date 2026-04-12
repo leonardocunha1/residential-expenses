@@ -31,9 +31,9 @@ import type {
 import type {
   RequestRegisterPersonJson,
   RequestUpdatePersonJson,
-  ResponseErrorJson,
-  ResponseRegisteredPersonJson,
-  ResponseShortPersonJson
+  ResponseApiJsonOfListOfResponseShortPersonJson,
+  ResponseApiJsonOfObject,
+  ResponseApiJsonOfResponseRegisteredPersonJson
 } from '../../models';
 
 import { axiosInstance } from '../../../http/axios-instance';
@@ -43,45 +43,6 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
 
-export type postApiPersonResponse201TextPlain = {
-  data: ResponseRegisteredPersonJson
-  status: 201
-}
-
-export type postApiPersonResponse201ApplicationJson = {
-  data: ResponseRegisteredPersonJson
-  status: 201
-}
-
-export type postApiPersonResponse201TextJson = {
-  data: ResponseRegisteredPersonJson
-  status: 201
-}
-
-export type postApiPersonResponse400TextPlain = {
-  data: ResponseErrorJson
-  status: 400
-}
-
-export type postApiPersonResponse400ApplicationJson = {
-  data: ResponseErrorJson
-  status: 400
-}
-
-export type postApiPersonResponse400TextJson = {
-  data: ResponseErrorJson
-  status: 400
-}
-
-export type postApiPersonResponseSuccess = (postApiPersonResponse201TextPlain | postApiPersonResponse201ApplicationJson | postApiPersonResponse201TextJson) & {
-  headers: Headers;
-};
-export type postApiPersonResponseError = (postApiPersonResponse400TextPlain | postApiPersonResponse400ApplicationJson | postApiPersonResponse400TextJson) & {
-  headers: Headers;
-};
-
-export type postApiPersonResponse = (postApiPersonResponseSuccess | postApiPersonResponseError)
-
 export const getPostApiPersonUrl = () => {
 
 
@@ -90,9 +51,9 @@ export const getPostApiPersonUrl = () => {
   return `/api/person`
 }
 
-export const postApiPerson = async (requestRegisterPersonJson: RequestRegisterPersonJson, options?: RequestInit): Promise<postApiPersonResponse> => {
+export const postApiPerson = async (requestRegisterPersonJson: RequestRegisterPersonJson, options?: RequestInit): Promise<ResponseApiJsonOfResponseRegisteredPersonJson> => {
 
-  return axiosInstance<postApiPersonResponse>(getPostApiPersonUrl(),
+  return axiosInstance<ResponseApiJsonOfResponseRegisteredPersonJson>(getPostApiPersonUrl(),
   {
     ...options,
     method: 'POST',
@@ -105,7 +66,7 @@ export const postApiPerson = async (requestRegisterPersonJson: RequestRegisterPe
 
 
 
-export const getPostApiPersonMutationOptions = <TError = ResponseErrorJson,
+export const getPostApiPersonMutationOptions = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiPerson>>, TError,{data: RequestRegisterPersonJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof postApiPerson>>, TError,{data: RequestRegisterPersonJson}, TContext> => {
 
@@ -134,9 +95,9 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type PostApiPersonMutationResult = NonNullable<Awaited<ReturnType<typeof postApiPerson>>>
     export type PostApiPersonMutationBody = RequestRegisterPersonJson
-    export type PostApiPersonMutationError = ResponseErrorJson
+    export type PostApiPersonMutationError = ResponseApiJsonOfObject
 
-    export const usePostApiPerson = <TError = ResponseErrorJson,
+    export const usePostApiPerson = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiPerson>>, TError,{data: RequestRegisterPersonJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postApiPerson>>,
@@ -146,29 +107,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPostApiPersonMutationOptions(options), queryClient);
     }
-    export type getApiPersonResponse200TextPlain = {
-  data: ResponseShortPersonJson[]
-  status: 200
-}
-
-export type getApiPersonResponse200ApplicationJson = {
-  data: ResponseShortPersonJson[]
-  status: 200
-}
-
-export type getApiPersonResponse200TextJson = {
-  data: ResponseShortPersonJson[]
-  status: 200
-}
-
-export type getApiPersonResponseSuccess = (getApiPersonResponse200TextPlain | getApiPersonResponse200ApplicationJson | getApiPersonResponse200TextJson) & {
-  headers: Headers;
-};
-;
-
-export type getApiPersonResponse = (getApiPersonResponseSuccess)
-
-export const getGetApiPersonUrl = () => {
+    export const getGetApiPersonUrl = () => {
 
 
 
@@ -176,9 +115,9 @@ export const getGetApiPersonUrl = () => {
   return `/api/person`
 }
 
-export const getApiPerson = async ( options?: RequestInit): Promise<getApiPersonResponse> => {
+export const getApiPerson = async ( options?: RequestInit): Promise<ResponseApiJsonOfListOfResponseShortPersonJson> => {
 
-  return axiosInstance<getApiPersonResponse>(getGetApiPersonUrl(),
+  return axiosInstance<ResponseApiJsonOfListOfResponseShortPersonJson>(getGetApiPersonUrl(),
   {
     ...options,
     method: 'GET'
@@ -328,50 +267,6 @@ export function useGetApiPerson<TData = Awaited<ReturnType<typeof getApiPerson>>
 
 
 
-export type putApiPersonIdResponse204 = {
-  data: void
-  status: 204
-}
-
-export type putApiPersonIdResponse400TextPlain = {
-  data: ResponseErrorJson
-  status: 400
-}
-
-export type putApiPersonIdResponse400ApplicationJson = {
-  data: ResponseErrorJson
-  status: 400
-}
-
-export type putApiPersonIdResponse400TextJson = {
-  data: ResponseErrorJson
-  status: 400
-}
-
-export type putApiPersonIdResponse404TextPlain = {
-  data: ResponseErrorJson
-  status: 404
-}
-
-export type putApiPersonIdResponse404ApplicationJson = {
-  data: ResponseErrorJson
-  status: 404
-}
-
-export type putApiPersonIdResponse404TextJson = {
-  data: ResponseErrorJson
-  status: 404
-}
-
-export type putApiPersonIdResponseSuccess = (putApiPersonIdResponse204) & {
-  headers: Headers;
-};
-export type putApiPersonIdResponseError = (putApiPersonIdResponse400TextPlain | putApiPersonIdResponse400ApplicationJson | putApiPersonIdResponse400TextJson | putApiPersonIdResponse404TextPlain | putApiPersonIdResponse404ApplicationJson | putApiPersonIdResponse404TextJson) & {
-  headers: Headers;
-};
-
-export type putApiPersonIdResponse = (putApiPersonIdResponseSuccess | putApiPersonIdResponseError)
-
 export const getPutApiPersonIdUrl = (id: number,) => {
 
 
@@ -381,9 +276,9 @@ export const getPutApiPersonIdUrl = (id: number,) => {
 }
 
 export const putApiPersonId = async (id: number,
-    requestUpdatePersonJson: RequestUpdatePersonJson, options?: RequestInit): Promise<putApiPersonIdResponse> => {
+    requestUpdatePersonJson: RequestUpdatePersonJson, options?: RequestInit): Promise<void> => {
 
-  return axiosInstance<putApiPersonIdResponse>(getPutApiPersonIdUrl(id),
+  return axiosInstance<void>(getPutApiPersonIdUrl(id),
   {
     ...options,
     method: 'PUT',
@@ -396,7 +291,7 @@ export const putApiPersonId = async (id: number,
 
 
 
-export const getPutApiPersonIdMutationOptions = <TError = ResponseErrorJson,
+export const getPutApiPersonIdMutationOptions = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putApiPersonId>>, TError,{id: number;data: RequestUpdatePersonJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof putApiPersonId>>, TError,{id: number;data: RequestUpdatePersonJson}, TContext> => {
 
@@ -425,9 +320,9 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type PutApiPersonIdMutationResult = NonNullable<Awaited<ReturnType<typeof putApiPersonId>>>
     export type PutApiPersonIdMutationBody = RequestUpdatePersonJson
-    export type PutApiPersonIdMutationError = ResponseErrorJson
+    export type PutApiPersonIdMutationError = ResponseApiJsonOfObject
 
-    export const usePutApiPersonId = <TError = ResponseErrorJson,
+    export const usePutApiPersonId = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putApiPersonId>>, TError,{id: number;data: RequestUpdatePersonJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof putApiPersonId>>,
@@ -437,36 +332,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPutApiPersonIdMutationOptions(options), queryClient);
     }
-    export type deleteApiPersonIdResponse204 = {
-  data: void
-  status: 204
-}
-
-export type deleteApiPersonIdResponse404TextPlain = {
-  data: ResponseErrorJson
-  status: 404
-}
-
-export type deleteApiPersonIdResponse404ApplicationJson = {
-  data: ResponseErrorJson
-  status: 404
-}
-
-export type deleteApiPersonIdResponse404TextJson = {
-  data: ResponseErrorJson
-  status: 404
-}
-
-export type deleteApiPersonIdResponseSuccess = (deleteApiPersonIdResponse204) & {
-  headers: Headers;
-};
-export type deleteApiPersonIdResponseError = (deleteApiPersonIdResponse404TextPlain | deleteApiPersonIdResponse404ApplicationJson | deleteApiPersonIdResponse404TextJson) & {
-  headers: Headers;
-};
-
-export type deleteApiPersonIdResponse = (deleteApiPersonIdResponseSuccess | deleteApiPersonIdResponseError)
-
-export const getDeleteApiPersonIdUrl = (id: number,) => {
+    export const getDeleteApiPersonIdUrl = (id: number,) => {
 
 
 
@@ -474,9 +340,9 @@ export const getDeleteApiPersonIdUrl = (id: number,) => {
   return `/api/person/${id}`
 }
 
-export const deleteApiPersonId = async (id: number, options?: RequestInit): Promise<deleteApiPersonIdResponse> => {
+export const deleteApiPersonId = async (id: number, options?: RequestInit): Promise<void> => {
 
-  return axiosInstance<deleteApiPersonIdResponse>(getDeleteApiPersonIdUrl(id),
+  return axiosInstance<void>(getDeleteApiPersonIdUrl(id),
   {
     ...options,
     method: 'DELETE'
@@ -488,7 +354,7 @@ export const deleteApiPersonId = async (id: number, options?: RequestInit): Prom
 
 
 
-export const getDeleteApiPersonIdMutationOptions = <TError = ResponseErrorJson,
+export const getDeleteApiPersonIdMutationOptions = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteApiPersonId>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof axiosInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof deleteApiPersonId>>, TError,{id: number}, TContext> => {
 
@@ -517,9 +383,9 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type DeleteApiPersonIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteApiPersonId>>>
 
-    export type DeleteApiPersonIdMutationError = ResponseErrorJson
+    export type DeleteApiPersonIdMutationError = ResponseApiJsonOfObject
 
-    export const useDeleteApiPersonId = <TError = ResponseErrorJson,
+    export const useDeleteApiPersonId = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteApiPersonId>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteApiPersonId>>,

@@ -8,15 +8,43 @@ import * as zod from 'zod';
 
 
 export const ValidatepostApiUserBody = zod.object({
+  "name": zod.string(),
+  "email": zod.string(),
+  "password": zod.string()
+})
+
+export const ValidategetApiUserResponse = zod.object({
+  "success": zod.boolean().optional(),
+  "data": zod.object({
   "name": zod.string().optional(),
-  "email": zod.string().optional(),
-  "password": zod.string().optional()
+  "email": zod.string().optional()
+}).nullish(),
+  "errors": zod.array(zod.string()).optional(),
+  "metadata": zod.object({
+  "page": zod.number().nullish(),
+  "pageSize": zod.number().nullish(),
+  "totalCount": zod.number().nullish()
+}).optional()
 })
 
 export const ValidateputApiUserBody = zod.object({
-  "name": zod.string().optional(),
-  "email": zod.string().optional(),
+  "name": zod.string(),
+  "email": zod.string(),
   "oldPassword": zod.string().optional(),
   "newPassword": zod.string().optional()
+})
+
+export const ValidateputApiUserResponse = zod.object({
+  "success": zod.boolean().optional(),
+  "data": zod.object({
+  "name": zod.string().optional(),
+  "email": zod.string().optional()
+}).nullish(),
+  "errors": zod.array(zod.string()).optional(),
+  "metadata": zod.object({
+  "page": zod.number().nullish(),
+  "pageSize": zod.number().nullish(),
+  "totalCount": zod.number().nullish()
+}).optional()
 })
 

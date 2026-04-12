@@ -7,6 +7,6 @@
 import type { CategoryPurposeJson } from './categoryPurposeJson';
 
 export interface RequestRegisterCategoryJson {
-  description?: string;
-  purpose?: CategoryPurposeJson;
+  description: string;
+  purpose: CategoryPurposeJson;
 }

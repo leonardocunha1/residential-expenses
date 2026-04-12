@@ -6,6 +6,6 @@
  */
 
 export interface RequestRegisterPersonJson {
-  name?: string;
-  age?: number;
+  name: string;
+  age: number;
 }

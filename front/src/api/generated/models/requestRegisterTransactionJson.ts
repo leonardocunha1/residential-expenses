@@ -7,9 +7,9 @@
 import type { TransactionTypeJson } from './transactionTypeJson';
 
 export interface RequestRegisterTransactionJson {
-  description?: string;
-  value?: number;
-  type?: TransactionTypeJson;
-  categoryId?: number;
-  personId?: number;
+  description: string;
+  value: number;
+  type: TransactionTypeJson;
+  categoryId: number;
+  personId: number;
 }

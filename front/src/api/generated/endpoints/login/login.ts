@@ -16,7 +16,7 @@ import type {
 
 import type {
   RequestLoginJson,
-  ResponseRegisteredUserJson
+  ResponseApiJsonOfResponseRegisteredUserJson
 } from '../../models';
 
 import { axiosInstance } from '../../../http/axios-instance';
@@ -26,28 +26,6 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
 
-export type postApiLoginResponse200TextPlain = {
-  data: ResponseRegisteredUserJson
-  status: 200
-}
-
-export type postApiLoginResponse200ApplicationJson = {
-  data: ResponseRegisteredUserJson
-  status: 200
-}
-
-export type postApiLoginResponse200TextJson = {
-  data: ResponseRegisteredUserJson
-  status: 200
-}
-
-export type postApiLoginResponseSuccess = (postApiLoginResponse200TextPlain | postApiLoginResponse200ApplicationJson | postApiLoginResponse200TextJson) & {
-  headers: Headers;
-};
-;
-
-export type postApiLoginResponse = (postApiLoginResponseSuccess)
-
 export const getPostApiLoginUrl = () => {
 
 
@@ -56,9 +34,9 @@ export const getPostApiLoginUrl = () => {
   return `/api/login`
 }
 
-export const postApiLogin = async (requestLoginJson: RequestLoginJson, options?: RequestInit): Promise<postApiLoginResponse> => {
+export const postApiLogin = async (requestLoginJson: RequestLoginJson, options?: RequestInit): Promise<ResponseApiJsonOfResponseRegisteredUserJson> => {
 
-  return axiosInstance<postApiLoginResponse>(getPostApiLoginUrl(),
+  return axiosInstance<ResponseApiJsonOfResponseRegisteredUserJson>(getPostApiLoginUrl(),
   {
     ...options,
     method: 'POST',

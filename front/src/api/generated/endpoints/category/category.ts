@@ -30,9 +30,9 @@ import type {
 
 import type {
   RequestRegisterCategoryJson,
-  ResponseErrorJson,
-  ResponseRegisteredCategoryJson,
-  ResponseShortCategoryJson
+  ResponseApiJsonOfListOfResponseShortCategoryJson,
+  ResponseApiJsonOfObject,
+  ResponseApiJsonOfResponseRegisteredCategoryJson
 } from '../../models';
 
 import { axiosInstance } from '../../../http/axios-instance';
@@ -42,45 +42,6 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
 
-export type postApiCategoryResponse201TextPlain = {
-  data: ResponseRegisteredCategoryJson
-  status: 201
-}
-
-export type postApiCategoryResponse201ApplicationJson = {
-  data: ResponseRegisteredCategoryJson
-  status: 201
-}
-
-export type postApiCategoryResponse201TextJson = {
-  data: ResponseRegisteredCategoryJson
-  status: 201
-}
-
-export type postApiCategoryResponse400TextPlain = {
-  data: ResponseErrorJson
-  status: 400
-}
-
-export type postApiCategoryResponse400ApplicationJson = {
-  data: ResponseErrorJson
-  status: 400
-}
-
-export type postApiCategoryResponse400TextJson = {
-  data: ResponseErrorJson
-  status: 400
-}
-
-export type postApiCategoryResponseSuccess = (postApiCategoryResponse201TextPlain | postApiCategoryResponse201ApplicationJson | postApiCategoryResponse201TextJson) & {
-  headers: Headers;
-};
-export type postApiCategoryResponseError = (postApiCategoryResponse400TextPlain | postApiCategoryResponse400ApplicationJson | postApiCategoryResponse400TextJson) & {
-  headers: Headers;
-};
-
-export type postApiCategoryResponse = (postApiCategoryResponseSuccess | postApiCategoryResponseError)
-
 export const getPostApiCategoryUrl = () => {
 
 
@@ -89,9 +50,9 @@ export const getPostApiCategoryUrl = () => {
   return `/api/category`
 }
 
-export const postApiCategory = async (requestRegisterCategoryJson: RequestRegisterCategoryJson, options?: RequestInit): Promise<postApiCategoryResponse> => {
+export const postApiCategory = async (requestRegisterCategoryJson: RequestRegisterCategoryJson, options?: RequestInit): Promise<ResponseApiJsonOfResponseRegisteredCategoryJson> => {
 
-  return axiosInstance<postApiCategoryResponse>(getPostApiCategoryUrl(),
+  return axiosInstance<ResponseApiJsonOfResponseRegisteredCategoryJson>(getPostApiCategoryUrl(),
   {
     ...options,
     method: 'POST',
@@ -104,7 +65,7 @@ export const postApiCategory = async (requestRegisterCategoryJson: RequestRegist
 
 
 
-export const getPostApiCategoryMutationOptions = <TError = ResponseErrorJson,
+export const getPostApiCategoryMutationOptions = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiCategory>>, TError,{data: RequestRegisterCategoryJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof postApiCategory>>, TError,{data: RequestRegisterCategoryJson}, TContext> => {
 
@@ -133,9 +94,9 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type PostApiCategoryMutationResult = NonNullable<Awaited<ReturnType<typeof postApiCategory>>>
     export type PostApiCategoryMutationBody = RequestRegisterCategoryJson
-    export type PostApiCategoryMutationError = ResponseErrorJson
+    export type PostApiCategoryMutationError = ResponseApiJsonOfObject
 
-    export const usePostApiCategory = <TError = ResponseErrorJson,
+    export const usePostApiCategory = <TError = ResponseApiJsonOfObject,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiCategory>>, TError,{data: RequestRegisterCategoryJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postApiCategory>>,
@@ -145,29 +106,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPostApiCategoryMutationOptions(options), queryClient);
     }
-    export type getApiCategoryResponse200TextPlain = {
-  data: ResponseShortCategoryJson[]
-  status: 200
-}
-
-export type getApiCategoryResponse200ApplicationJson = {
-  data: ResponseShortCategoryJson[]
-  status: 200
-}
-
-export type getApiCategoryResponse200TextJson = {
-  data: ResponseShortCategoryJson[]
-  status: 200
-}
-
-export type getApiCategoryResponseSuccess = (getApiCategoryResponse200TextPlain | getApiCategoryResponse200ApplicationJson | getApiCategoryResponse200TextJson) & {
-  headers: Headers;
-};
-;
-
-export type getApiCategoryResponse = (getApiCategoryResponseSuccess)
-
-export const getGetApiCategoryUrl = () => {
+    export const getGetApiCategoryUrl = () => {
 
 
 
@@ -175,9 +114,9 @@ export const getGetApiCategoryUrl = () => {
   return `/api/category`
 }
 
-export const getApiCategory = async ( options?: RequestInit): Promise<getApiCategoryResponse> => {
+export const getApiCategory = async ( options?: RequestInit): Promise<ResponseApiJsonOfListOfResponseShortCategoryJson> => {
 
-  return axiosInstance<getApiCategoryResponse>(getGetApiCategoryUrl(),
+  return axiosInstance<ResponseApiJsonOfListOfResponseShortCategoryJson>(getGetApiCategoryUrl(),
   {
     ...options,
     method: 'GET'

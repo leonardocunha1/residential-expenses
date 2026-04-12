@@ -5,7 +5,10 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface RequestLoginJson {
-  email: string;
-  password: string;
-}
+/**
+ * @nullable
+ */
+export type ResponseUserProfileJson = {
+  name?: string;
+  email?: string;
+} | null;
