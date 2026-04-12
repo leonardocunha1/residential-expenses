@@ -8,27 +8,27 @@ Aplicacao full-stack para gerenciamento de financas residenciais compartilhadas.
 
 ### Login & Registro
 <p>
-  <img src="imgs/FireShot Capture 001 - front - [localhost].png" alt="Login" width="45%">
-  <img src="imgs/FireShot Capture 002 - front - [localhost].png" alt="Registro" width="45%">
+  <img src="imgs/001.png" alt="Login" width="45%">
+  <img src="imgs/002.png" alt="Registro" width="45%">
 </p>
 
 ### Dashboard
-<img src="imgs/FireShot Capture 004 - front - [localhost].png" alt="Dashboard" width="90%">
+<img src="imgs/004.png" alt="Dashboard" width="90%">
 
 ### Moradores
 <p>
-  <img src="imgs/FireShot Capture 005 - front - [localhost].png" alt="Moradores" width="45%">
-  <img src="imgs/FireShot Capture 006 - front - [localhost].png" alt="Editar Morador" width="45%">
+  <img src="imgs/005.png" alt="Moradores" width="45%">
+  <img src="imgs/006.png" alt="Editar Morador" width="45%">
 </p>
 
 ### Categorias & Transacoes
 <p>
-  <img src="imgs/FireShot Capture 007 - front - [localhost].png" alt="Categorias" width="45%">
-  <img src="imgs/FireShot Capture 008 - front - [localhost].png" alt="Transacoes" width="45%">
+  <img src="imgs/007.png" alt="Categorias" width="45%">
+  <img src="imgs/008.png" alt="Transacoes" width="45%">
 </p>
 
 ### Perfil
-<img src="imgs/FireShot Capture 003 - front - [localhost].png" alt="Perfil" width="90%">
+<img src="imgs/003.png" alt="Perfil" width="90%">
 
 </div>
 
