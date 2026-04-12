@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ResidentialExpenses.Domain.Repositories;
+using ResidentialExpenses.Domain.Repositories.Category;
+using ResidentialExpenses.Domain.Repositories.Person;
+using ResidentialExpenses.Domain.Repositories.Transaction;
 using ResidentialExpenses.Domain.Repositories.User;
 using ResidentialExpenses.Domain.Security.Cryptography;
 using ResidentialExpenses.Domain.Security.Tokens;
@@ -43,6 +46,13 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUserReadOnlyRepository, UserRepository>();
         services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
+        services.AddScoped<IPersonReadOnlyRepository, PersonRepository>();
+        services.AddScoped<IPersonWriteOnlyRepository, PersonRepository>();
+        services.AddScoped<IPersonUpdateOnlyRepository, PersonRepository>();
+        services.AddScoped<ICategoryReadOnlyRepository, CategoryRepository>();
+        services.AddScoped<ICategoryWriteOnlyRepository, CategoryRepository>();
+        services.AddScoped<ITransactionReadOnlyRepository, TransactionRepository>();
+        services.AddScoped<ITransactionWriteOnlyRepository, TransactionRepository>();
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

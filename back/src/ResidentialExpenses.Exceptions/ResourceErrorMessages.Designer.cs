@@ -158,5 +158,104 @@ namespace ResidentialExpenses.Exceptions {
                 return ResourceManager.GetString("OLD_PASSWORD_INCORRECT", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to O nome da pessoa não pode ser vazio..
+        /// </summary>
+        public static string PERSON_NAME_EMPTY {
+            get {
+                return ResourceManager.GetString("PERSON_NAME_EMPTY", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to A idade deve ser maior que zero..
+        /// </summary>
+        public static string PERSON_AGE_INVALID {
+            get {
+                return ResourceManager.GetString("PERSON_AGE_INVALID", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Pessoa não encontrada..
+        /// </summary>
+        public static string PERSON_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("PERSON_NOT_FOUND", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to A descrição da categoria não pode ser vazia..
+        /// </summary>
+        public static string CATEGORY_DESCRIPTION_EMPTY {
+            get {
+                return ResourceManager.GetString("CATEGORY_DESCRIPTION_EMPTY", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to A finalidade da categoria é inválida..
+        /// </summary>
+        public static string CATEGORY_PURPOSE_INVALID {
+            get {
+                return ResourceManager.GetString("CATEGORY_PURPOSE_INVALID", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to A descrição da transação não pode ser vazia..
+        /// </summary>
+        public static string TRANSACTION_DESCRIPTION_EMPTY {
+            get {
+                return ResourceManager.GetString("TRANSACTION_DESCRIPTION_EMPTY", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to O valor da transação deve ser maior que zero..
+        /// </summary>
+        public static string TRANSACTION_VALUE_MUST_BE_POSITIVE {
+            get {
+                return ResourceManager.GetString("TRANSACTION_VALUE_MUST_BE_POSITIVE", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to O tipo da transação é inválido..
+        /// </summary>
+        public static string TRANSACTION_TYPE_INVALID {
+            get {
+                return ResourceManager.GetString("TRANSACTION_TYPE_INVALID", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Categoria não encontrada..
+        /// </summary>
+        public static string TRANSACTION_CATEGORY_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("TRANSACTION_CATEGORY_NOT_FOUND", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to A categoria informada não é compatível com o tipo da transação..
+        /// </summary>
+        public static string TRANSACTION_CATEGORY_PURPOSE_MISMATCH {
+            get {
+                return ResourceManager.GetString("TRANSACTION_CATEGORY_PURPOSE_MISMATCH", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Menores de 18 anos só podem ter transações do tipo despesa..
+        /// </summary>
+        public static string TRANSACTION_MINOR_ONLY_EXPENSE {
+            get {
+                return ResourceManager.GetString("TRANSACTION_MINOR_ONLY_EXPENSE", resourceCulture);
+            }
+        }
     }
 }

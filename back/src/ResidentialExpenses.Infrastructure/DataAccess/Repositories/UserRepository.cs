@@ -4,7 +4,7 @@ using ResidentialExpenses.Domain.Repositories.User;
 
 namespace ResidentialExpenses.Infrastructure.DataAccess.Repositories;
 
-internal class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository, IUserUpdateOnlyRepository
+public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository, IUserUpdateOnlyRepository
 {
     private readonly ResidentialExpensesDbContext _dbContext;
 

@@ -11,6 +11,8 @@
 .claude_project
 .devflow/
 docs/
+.agents
+skills-lock.json
 
 # User-specific files
 *.rsuser

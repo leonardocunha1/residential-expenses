@@ -1,4 +1,5 @@
 using ResidentialExpenses.Communication.Requests;
+using ResidentialExpenses.Communication.Responses;
 using ResidentialExpenses.Domain.Repositories;
 using ResidentialExpenses.Domain.Repositories.User;
 using ResidentialExpenses.Domain.Security.Cryptography;
@@ -30,7 +31,7 @@ public class UpdateUserUseCase : IUpdateUserUseCase
         _passwordEncripter = passwordEncripter;
     }
 
-    public async Task Execute(RequestUpdateUserJson request)
+    public async Task<ResponseUserProfileJson> Execute(RequestUpdateUserJson request)
     {
         var loggedUser = await _loggedUser.Get();
 
@@ -54,6 +55,12 @@ public class UpdateUserUseCase : IUpdateUserUseCase
         _updateOnlyRepository.Update(user);
 
         await _unitOfWork.Commit();
+
+        return new ResponseUserProfileJson
+        {
+            Name = user.Name,
+            Email = user.Email
+        };
     }
 
     private async Task Validate(RequestUpdateUserJson request, string currentEmail)

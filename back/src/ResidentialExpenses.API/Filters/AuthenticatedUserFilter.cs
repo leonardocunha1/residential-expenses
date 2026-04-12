@@ -36,19 +36,27 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
         }
         catch (SecurityTokenExpiredException)
         {
-            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ResourceErrorMessages.TOKEN_EXPIRED)
-            {
-                TokenIsExpired = true,
-            });
+            context.Result = new UnauthorizedObjectResult(CreateErrorEnvelope(ResourceErrorMessages.TOKEN_EXPIRED));
         }
         catch (ResidentialExpensesException ex)
         {
-            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ex.Message));
+            context.Result = new UnauthorizedObjectResult(CreateErrorEnvelope(ex.Message));
         }
         catch
         {
-            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ResourceErrorMessages.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE));
+            context.Result = new UnauthorizedObjectResult(CreateErrorEnvelope(ResourceErrorMessages.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE));
         }
+    }
+
+    private static ResponseApiJson<object?> CreateErrorEnvelope(string error)
+    {
+        return new ResponseApiJson<object?>
+        {
+            Success = false,
+            Data = null,
+            Errors = [error],
+            Metadata = new ResponseMetadataJson()
+        };
     }
 
     private static string TokenOnRequest(AuthorizationFilterContext context)

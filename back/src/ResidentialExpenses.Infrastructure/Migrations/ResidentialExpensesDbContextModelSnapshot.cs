@@ -55,7 +55,7 @@ namespace ResidentialExpenses.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("ResidentialExpenses.Domain.Entities.Person", b =>
@@ -76,7 +76,7 @@ namespace ResidentialExpenses.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("People", (string)null);
+                    b.ToTable("People");
                 });
 
             modelBuilder.Entity("ResidentialExpenses.Domain.Entities.Transaction", b =>
@@ -110,7 +110,7 @@ namespace ResidentialExpenses.Infrastructure.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("Transactions", (string)null);
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("ResidentialExpenses.Domain.Entities.User", b =>
@@ -124,7 +124,7 @@ namespace ResidentialExpenses.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("NOW()");
+                        .HasDefaultValueSql("(now() at time zone 'utc')");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -145,7 +145,7 @@ namespace ResidentialExpenses.Infrastructure.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("PersonUser", b =>
