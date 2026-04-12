@@ -11,6 +11,7 @@
 .claude_project
 .devflow/
 docs/
+.agents
 
 # User-specific files
 *.rsuser
