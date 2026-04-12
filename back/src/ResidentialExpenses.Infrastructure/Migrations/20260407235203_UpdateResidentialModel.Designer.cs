@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ResidentialExpenses.Infrastructure.DataAccess;
@@ -11,9 +12,11 @@ using ResidentialExpenses.Infrastructure.DataAccess;
 namespace ResidentialExpenses.Infrastructure.Migrations
 {
     [DbContext(typeof(ResidentialExpensesDbContext))]
-    partial class ResidentialExpensesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260407235203_UpdateResidentialModel")]
+    partial class UpdateResidentialModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
