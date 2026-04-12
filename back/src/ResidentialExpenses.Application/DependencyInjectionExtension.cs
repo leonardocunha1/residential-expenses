@@ -12,6 +12,7 @@ using ResidentialExpenses.Application.UseCases.People.Register;
 using ResidentialExpenses.Application.UseCases.People.Update;
 using ResidentialExpenses.Application.UseCases.Users.Delete;
 using ResidentialExpenses.Application.UseCases.Users.Login;
+using ResidentialExpenses.Application.UseCases.Users.Profile;
 using ResidentialExpenses.Application.UseCases.Users.Register;
 using ResidentialExpenses.Application.UseCases.Users.Update;
 using Microsoft.Extensions.Configuration;
@@ -50,6 +51,7 @@ public static class DependencyInjectionExtension
     {
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+        services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
         services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
 
