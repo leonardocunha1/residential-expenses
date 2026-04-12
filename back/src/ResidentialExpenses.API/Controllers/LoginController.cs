@@ -8,12 +8,12 @@ namespace ResidentialExpenses.API.Controllers;
 public class LoginController : ResidentialExpensesBaseController
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseApiJson<ResponseRegisteredUserJson>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Login(
         [FromServices] IDoLoginUseCase useCase,
         [FromBody] RequestLoginJson request)
     {
         var result = await useCase.Execute(request);
-        return Ok(result);
+        return SuccessOk(result);
     }
 }

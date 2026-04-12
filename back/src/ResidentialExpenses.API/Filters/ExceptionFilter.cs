@@ -24,17 +24,26 @@ public class ExceptionFilter : IExceptionFilter
     private void HandleProjectException(ExceptionContext context)
     {
         var residentialExpensesException = (ResidentialExpensesException)context.Exception;
-        var errorResponse = new ResponseErrorJson(residentialExpensesException.GetErrors());
         context.HttpContext.Response.StatusCode = residentialExpensesException.StatusCode;
-        context.Result = new ObjectResult(errorResponse);
+        context.Result = new ObjectResult(CreateErrorEnvelope(residentialExpensesException.GetErrors()));
         context.ExceptionHandled = true;
     }
 
     private void ThrowUnknowError(ExceptionContext context)
     {
-        var errorResponse = new ResponseErrorJson(ResourceErrorMessages.UNKNOW_ERROR);
         context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
-        context.Result = new ObjectResult(errorResponse);
+        context.Result = new ObjectResult(CreateErrorEnvelope([ResourceErrorMessages.UNKNOW_ERROR]));
         context.ExceptionHandled = true;
+    }
+
+    private static ResponseApiJson<object?> CreateErrorEnvelope(List<string> errors)
+    {
+        return new ResponseApiJson<object?>
+        {
+            Success = false,
+            Data = null,
+            Errors = errors,
+            Metadata = new ResponseMetadataJson()
+        };
     }
 }
