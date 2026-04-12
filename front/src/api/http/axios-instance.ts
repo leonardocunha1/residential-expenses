@@ -1,13 +1,13 @@
-import axios, { AxiosError } from "axios";
-import type { AxiosRequestConfig } from "axios";
+import axios, { AxiosError } from 'axios';
+import type { AxiosRequestConfig } from 'axios';
 
-const TOKEN_KEY = "token";
+const TOKEN_KEY = 'token';
 const API_BASE_URL =
   (
     globalThis as {
       process?: { env?: { VITE_API_ENDPOINT?: string } };
     }
-  ).process?.env?.VITE_API_ENDPOINT ?? "https://localhost:7248";
+  ).process?.env?.VITE_API_ENDPOINT ?? 'https://localhost:7248';
 
 export const httpClient = axios.create({
   baseURL: API_BASE_URL,
@@ -16,7 +16,7 @@ export const httpClient = axios.create({
 
 const normalizeHeaders = (
   headers?: HeadersInit,
-): AxiosRequestConfig["headers"] | undefined => {
+): AxiosRequestConfig['headers'] | undefined => {
   if (!headers) return undefined;
 
   if (headers instanceof Headers) {
@@ -41,9 +41,10 @@ httpClient.interceptors.request.use((config) => {
 httpClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 && window.location.pathname !== '/login') {
       localStorage.removeItem(TOKEN_KEY);
-      window.location.href = "/login";
+      localStorage.removeItem('userName');
+      window.location.href = '/login';
     }
     return Promise.reject(error);
   },
@@ -51,13 +52,13 @@ httpClient.interceptors.response.use(
 
 export async function axiosInstance<T>(
   urlOrConfig: string | AxiosRequestConfig,
-  options?: any,
+  options?: RequestInit,
 ): Promise<T> {
   const requestConfig: AxiosRequestConfig =
-    typeof urlOrConfig === "string"
+    typeof urlOrConfig === 'string'
       ? {
           url: urlOrConfig,
-          method: options?.method as AxiosRequestConfig["method"],
+          method: options?.method as AxiosRequestConfig['method'],
           headers: normalizeHeaders(options?.headers),
           data: options?.body,
           signal: options?.signal ?? undefined,
