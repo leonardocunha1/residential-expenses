@@ -20,17 +20,16 @@ import { EmptyState } from '@/components/shared/empty-state';
 
 import {
   useGetApiTransactionTotals,
-  type ResponseTotalsSummaryJson,
   type ResponsePersonTotalsJson,
 } from '@/api/generated';
-import { formatCurrency, unwrapApiData } from '@/lib/utils';
+import { formatCurrency } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 
 const EMPTY_PEOPLE: ResponsePersonTotalsJson[] = [];
 
 export default function DashboardPage() {
   const { data: totalsResponse, isLoading } = useGetApiTransactionTotals();
-  const totals = unwrapApiData<ResponseTotalsSummaryJson>(totalsResponse?.data);
+  const totals = totalsResponse?.data;
 
   if (isLoading) {
     return (

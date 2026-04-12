@@ -36,7 +36,6 @@ import { TRANSACTION_TYPE } from '@/constants/enums';
 import {
   formatCurrency,
   getApiErrorMessages,
-  unwrapApiData,
 } from '@/lib/utils';
 
 const EMPTY_PERSONS: ResponseShortPersonJson[] = [];
@@ -50,12 +49,8 @@ export default function TransactionsPage() {
 
   const { data: personsResponse } = useGetApiPerson();
   const { data: categoriesResponse } = useGetApiCategory();
-  const persons =
-    unwrapApiData<ResponseShortPersonJson[]>(personsResponse?.data) ??
-    EMPTY_PERSONS;
-  const categories =
-    unwrapApiData<ResponseShortCategoryJson[]>(categoriesResponse?.data) ??
-    EMPTY_CATEGORIES;
+  const persons = personsResponse?.data ?? EMPTY_PERSONS;
+  const categories = categoriesResponse?.data ?? EMPTY_CATEGORIES;
 
   const categoryMap = useMemo(() => {
     const map = new Map<number, string>();
@@ -70,11 +65,8 @@ export default function TransactionsPage() {
       query: { enabled: selectedPersonId != null },
     });
   const transactions = useMemo(() => {
-    const unwrapped = unwrapApiData<ResponseShortTransactionJson[]>(
-      transactionsResponse?.data,
-    );
-
-    return Array.isArray(unwrapped) ? unwrapped : EMPTY_TRANSACTIONS;
+    const data = transactionsResponse?.data;
+    return Array.isArray(data) ? data : EMPTY_TRANSACTIONS;
   }, [transactionsResponse?.data]);
 
   const createMutation = usePostApiTransaction({
