@@ -37,7 +37,7 @@ type ProfileForm = z.infer<typeof profileSchema>;
 type PasswordForm = z.infer<typeof passwordSchema>;
 
 export default function ProfilePage() {
-  const { logout } = useAuth();
+  const { logout, updateUserName } = useAuth();
   const navigate = useNavigate();
   const [deleteOpen, setDeleteOpen] = useState(false);
 
@@ -64,7 +64,12 @@ export default function ProfilePage() {
 
   const updateMutation = usePutApiUser({
     mutation: {
-      onSuccess: () => toast.success("Perfil atualizado com sucesso!"),
+      onSuccess: (response) => {
+        if (response.data?.name) {
+          updateUserName(response.data.name);
+        }
+        toast.success("Perfil atualizado com sucesso!");
+      },
       onError: (error) => toast.error(getApiErrorMessages(error, "Erro ao atualizar perfil.")),
     },
   });

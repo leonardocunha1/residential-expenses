@@ -25,14 +25,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUserName(null);
   }, []);
 
+  const updateUserName = useCallback((name: string) => {
+    localStorage.setItem(USER_NAME_KEY, name);
+    setUserName(name);
+  }, []);
+
   const value = useMemo<AuthContextValue>(
     () => ({
       isAuthenticated: !!token,
       userName,
       login,
       logout,
+      updateUserName,
     }),
-    [token, userName, login, logout],
+    [token, userName, login, logout, updateUserName],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
