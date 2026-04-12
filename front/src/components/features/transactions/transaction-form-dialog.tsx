@@ -32,7 +32,6 @@ import {
   TRANSACTION_TYPE_LABELS,
   CATEGORY_PURPOSE,
 } from '@/constants/enums';
-import { unwrapApiData } from '@/lib/utils';
 
 const EMPTY_CATEGORIES: ResponseShortCategoryJson[] = [];
 const EMPTY_PERSONS: ResponseShortPersonJson[] = [];
@@ -77,12 +76,8 @@ export function TransactionFormDialog({
   const { data: personsResponse } = useGetApiPerson();
   const { data: categoriesResponse } = useGetApiCategory();
 
-  const persons =
-    unwrapApiData<ResponseShortPersonJson[]>(personsResponse?.data) ??
-    EMPTY_PERSONS;
-  const allCategories =
-    unwrapApiData<ResponseShortCategoryJson[]>(categoriesResponse?.data) ??
-    EMPTY_CATEGORIES;
+  const persons = personsResponse?.data ?? EMPTY_PERSONS;
+  const allCategories = categoriesResponse?.data ?? EMPTY_CATEGORIES;
 
   const {
     register,

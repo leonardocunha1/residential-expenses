@@ -28,7 +28,7 @@ import {
   getGetApiPersonQueryKey,
   type ResponseShortPersonJson,
 } from '@/api/generated';
-import { getApiErrorMessages, unwrapApiData } from '@/lib/utils';
+import { getApiErrorMessages } from '@/lib/utils';
 
 const EMPTY_PERSONS: ResponseShortPersonJson[] = [];
 
@@ -40,9 +40,7 @@ export default function PersonsPage() {
     useState<ResponseShortPersonJson | null>(null);
 
   const { data: personsResponse, isLoading } = useGetApiPerson();
-  const persons =
-    unwrapApiData<ResponseShortPersonJson[]>(personsResponse?.data) ??
-    EMPTY_PERSONS;
+  const persons = personsResponse?.data ?? EMPTY_PERSONS;
   console.log('Persons:', persons);
 
   const invalidatePersons = () =>

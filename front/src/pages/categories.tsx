@@ -21,7 +21,7 @@ import {
   type ResponseShortCategoryJson,
 } from '@/api/generated';
 import { CATEGORY_PURPOSE, CATEGORY_PURPOSE_LABELS } from '@/constants/enums';
-import { getApiErrorMessages, unwrapApiData } from '@/lib/utils';
+import { getApiErrorMessages } from '@/lib/utils';
 
 const EMPTY_CATEGORIES: ResponseShortCategoryJson[] = [];
 
@@ -48,9 +48,7 @@ export default function CategoriesPage() {
   const [formOpen, setFormOpen] = useState(false);
 
   const { data: categoriesResponse, isLoading } = useGetApiCategory();
-  const categories =
-    unwrapApiData<ResponseShortCategoryJson[]>(categoriesResponse?.data) ??
-    EMPTY_CATEGORIES;
+  const categories = categoriesResponse?.data ?? EMPTY_CATEGORIES;
 
   const createMutation = usePostApiCategory({
     mutation: {
