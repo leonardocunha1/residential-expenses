@@ -15,8 +15,9 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ProblemDetails,
   RequestLoginJson,
-  ResponseApiJsonOfResponseRegisteredUserJson
+  ResponseRegisteredUserJson
 } from '../../models';
 
 import { axiosInstance } from '../../../http/axios-instance';
@@ -34,9 +35,9 @@ export const getPostApiLoginUrl = () => {
   return `/api/login`
 }
 
-export const postApiLogin = async (requestLoginJson: RequestLoginJson, options?: RequestInit): Promise<ResponseApiJsonOfResponseRegisteredUserJson> => {
+export const postApiLogin = async (requestLoginJson: RequestLoginJson, options?: RequestInit): Promise<ResponseRegisteredUserJson> => {
 
-  return axiosInstance<ResponseApiJsonOfResponseRegisteredUserJson>(getPostApiLoginUrl(),
+  return axiosInstance<ResponseRegisteredUserJson>(getPostApiLoginUrl(),
   {
     ...options,
     method: 'POST',
@@ -49,7 +50,7 @@ export const postApiLogin = async (requestLoginJson: RequestLoginJson, options?:
 
 
 
-export const getPostApiLoginMutationOptions = <TError = unknown,
+export const getPostApiLoginMutationOptions = <TError = ProblemDetails,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiLogin>>, TError,{data: RequestLoginJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof postApiLogin>>, TError,{data: RequestLoginJson}, TContext> => {
 
@@ -78,9 +79,9 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type PostApiLoginMutationResult = NonNullable<Awaited<ReturnType<typeof postApiLogin>>>
     export type PostApiLoginMutationBody = RequestLoginJson
-    export type PostApiLoginMutationError = unknown
+    export type PostApiLoginMutationError = ProblemDetails
 
-    export const usePostApiLogin = <TError = unknown,
+    export const usePostApiLogin = <TError = ProblemDetails,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiLogin>>, TError,{data: RequestLoginJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postApiLogin>>,

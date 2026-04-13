@@ -14,17 +14,8 @@ export const ValidatepostApiUserBody = zod.object({
 })
 
 export const ValidategetApiUserResponse = zod.object({
-  "success": zod.boolean().optional(),
-  "data": zod.object({
   "name": zod.string().optional(),
   "email": zod.string().optional()
-}).nullish(),
-  "errors": zod.array(zod.string()).optional(),
-  "metadata": zod.object({
-  "page": zod.number().nullish(),
-  "pageSize": zod.number().nullish(),
-  "totalCount": zod.number().nullish()
-}).optional()
 })
 
 export const ValidateputApiUserBody = zod.object({
@@ -35,16 +26,7 @@ export const ValidateputApiUserBody = zod.object({
 })
 
 export const ValidateputApiUserResponse = zod.object({
-  "success": zod.boolean().optional(),
-  "data": zod.object({
   "name": zod.string().optional(),
   "email": zod.string().optional()
-}).nullish(),
-  "errors": zod.array(zod.string()).optional(),
-  "metadata": zod.object({
-  "page": zod.number().nullish(),
-  "pageSize": zod.number().nullish(),
-  "totalCount": zod.number().nullish()
-}).optional()
 })
 

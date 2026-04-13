@@ -29,11 +29,11 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ProblemDetails,
   RequestRegisterTransactionJson,
-  ResponseApiJsonOfListOfResponseShortTransactionJson,
-  ResponseApiJsonOfObject,
-  ResponseApiJsonOfResponseRegisteredTransactionJson,
-  ResponseApiJsonOfResponseTotalsSummaryJson
+  ResponseRegisteredTransactionJson,
+  ResponseShortTransactionJson,
+  ResponseTotalsSummaryJson
 } from '../../models';
 
 import { axiosInstance } from '../../../http/axios-instance';
@@ -51,9 +51,9 @@ export const getPostApiTransactionUrl = () => {
   return `/api/transaction`
 }
 
-export const postApiTransaction = async (requestRegisterTransactionJson: RequestRegisterTransactionJson, options?: RequestInit): Promise<ResponseApiJsonOfResponseRegisteredTransactionJson> => {
+export const postApiTransaction = async (requestRegisterTransactionJson: RequestRegisterTransactionJson, options?: RequestInit): Promise<ResponseRegisteredTransactionJson> => {
 
-  return axiosInstance<ResponseApiJsonOfResponseRegisteredTransactionJson>(getPostApiTransactionUrl(),
+  return axiosInstance<ResponseRegisteredTransactionJson>(getPostApiTransactionUrl(),
   {
     ...options,
     method: 'POST',
@@ -66,7 +66,7 @@ export const postApiTransaction = async (requestRegisterTransactionJson: Request
 
 
 
-export const getPostApiTransactionMutationOptions = <TError = ResponseApiJsonOfObject,
+export const getPostApiTransactionMutationOptions = <TError = ProblemDetails,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiTransaction>>, TError,{data: RequestRegisterTransactionJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof postApiTransaction>>, TError,{data: RequestRegisterTransactionJson}, TContext> => {
 
@@ -95,9 +95,9 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type PostApiTransactionMutationResult = NonNullable<Awaited<ReturnType<typeof postApiTransaction>>>
     export type PostApiTransactionMutationBody = RequestRegisterTransactionJson
-    export type PostApiTransactionMutationError = ResponseApiJsonOfObject
+    export type PostApiTransactionMutationError = ProblemDetails
 
-    export const usePostApiTransaction = <TError = ResponseApiJsonOfObject,
+    export const usePostApiTransaction = <TError = ProblemDetails,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiTransaction>>, TError,{data: RequestRegisterTransactionJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postApiTransaction>>,
@@ -115,9 +115,9 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return `/api/transaction/person/${personId}`
 }
 
-export const getApiTransactionPersonPersonId = async (personId: number, options?: RequestInit): Promise<ResponseApiJsonOfListOfResponseShortTransactionJson> => {
+export const getApiTransactionPersonPersonId = async (personId: number, options?: RequestInit): Promise<ResponseShortTransactionJson[]> => {
 
-  return axiosInstance<ResponseApiJsonOfListOfResponseShortTransactionJson>(getGetApiTransactionPersonPersonIdUrl(personId),
+  return axiosInstance<ResponseShortTransactionJson[]>(getGetApiTransactionPersonPersonIdUrl(personId),
   {
     ...options,
     method: 'GET'
@@ -143,7 +143,7 @@ export const getGetApiTransactionPersonPersonIdQueryKey = (personId: number,) =>
     }
 
 
-export const getGetApiTransactionPersonPersonIdInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>, TError = ResponseApiJsonOfObject>(personId: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
+export const getGetApiTransactionPersonPersonIdInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>, TError = ProblemDetails>(personId: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -162,10 +162,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetApiTransactionPersonPersonIdInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>
-export type GetApiTransactionPersonPersonIdInfiniteQueryError = ResponseApiJsonOfObject
+export type GetApiTransactionPersonPersonIdInfiniteQueryError = ProblemDetails
 
 
-export function useGetApiTransactionPersonPersonIdInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>, TError = ResponseApiJsonOfObject>(
+export function useGetApiTransactionPersonPersonIdInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>, TError = ProblemDetails>(
  personId: number, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>,
@@ -175,7 +175,7 @@ export function useGetApiTransactionPersonPersonIdInfinite<TData = InfiniteData<
       >, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiTransactionPersonPersonIdInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>, TError = ResponseApiJsonOfObject>(
+export function useGetApiTransactionPersonPersonIdInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>, TError = ProblemDetails>(
  personId: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>,
@@ -185,12 +185,12 @@ export function useGetApiTransactionPersonPersonIdInfinite<TData = InfiniteData<
       >, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiTransactionPersonPersonIdInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>, TError = ResponseApiJsonOfObject>(
+export function useGetApiTransactionPersonPersonIdInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>, TError = ProblemDetails>(
  personId: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useGetApiTransactionPersonPersonIdInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>, TError = ResponseApiJsonOfObject>(
+export function useGetApiTransactionPersonPersonIdInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>, TError = ProblemDetails>(
  personId: number, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient
  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -205,7 +205,7 @@ export function useGetApiTransactionPersonPersonIdInfinite<TData = InfiniteData<
 
 
 
-export const getGetApiTransactionPersonPersonIdQueryOptions = <TData = Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError = ResponseApiJsonOfObject>(personId: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
+export const getGetApiTransactionPersonPersonIdQueryOptions = <TData = Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError = ProblemDetails>(personId: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -224,10 +224,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetApiTransactionPersonPersonIdQueryResult = NonNullable<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>>
-export type GetApiTransactionPersonPersonIdQueryError = ResponseApiJsonOfObject
+export type GetApiTransactionPersonPersonIdQueryError = ProblemDetails
 
 
-export function useGetApiTransactionPersonPersonId<TData = Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError = ResponseApiJsonOfObject>(
+export function useGetApiTransactionPersonPersonId<TData = Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError = ProblemDetails>(
  personId: number, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>,
@@ -237,7 +237,7 @@ export function useGetApiTransactionPersonPersonId<TData = Awaited<ReturnType<ty
       >, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiTransactionPersonPersonId<TData = Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError = ResponseApiJsonOfObject>(
+export function useGetApiTransactionPersonPersonId<TData = Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError = ProblemDetails>(
  personId: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>,
@@ -247,12 +247,12 @@ export function useGetApiTransactionPersonPersonId<TData = Awaited<ReturnType<ty
       >, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiTransactionPersonPersonId<TData = Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError = ResponseApiJsonOfObject>(
+export function useGetApiTransactionPersonPersonId<TData = Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError = ProblemDetails>(
  personId: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useGetApiTransactionPersonPersonId<TData = Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError = ResponseApiJsonOfObject>(
+export function useGetApiTransactionPersonPersonId<TData = Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError = ProblemDetails>(
  personId: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiTransactionPersonPersonId>>, TError, TData>>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -275,9 +275,9 @@ export const getGetApiTransactionTotalsUrl = () => {
   return `/api/transaction/totals`
 }
 
-export const getApiTransactionTotals = async ( options?: RequestInit): Promise<ResponseApiJsonOfResponseTotalsSummaryJson> => {
+export const getApiTransactionTotals = async ( options?: RequestInit): Promise<ResponseTotalsSummaryJson> => {
 
-  return axiosInstance<ResponseApiJsonOfResponseTotalsSummaryJson>(getGetApiTransactionTotalsUrl(),
+  return axiosInstance<ResponseTotalsSummaryJson>(getGetApiTransactionTotalsUrl(),
   {
     ...options,
     method: 'GET'

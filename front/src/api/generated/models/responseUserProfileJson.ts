@@ -5,10 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 
-/**
- * @nullable
- */
-export type ResponseUserProfileJson = {
+export interface ResponseUserProfileJson {
   name?: string;
   email?: string;
-} | null;
+}

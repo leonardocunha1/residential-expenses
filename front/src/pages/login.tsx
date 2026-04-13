@@ -42,7 +42,7 @@ export default function LoginPage() {
   const loginMutation = usePostApiLogin({
     mutation: {
       onSuccess: (response) => {
-        const { name, tokens } = response.data ?? {};
+        const { name, tokens } = response ?? {};
         if (tokens?.accessToken) {
           login(tokens.accessToken, name ?? '');
           toast.success('Login realizado com sucesso!');

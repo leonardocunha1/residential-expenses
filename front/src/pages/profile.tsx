@@ -49,10 +49,10 @@ export default function ProfilePage() {
   });
 
   useEffect(() => {
-    if (profile?.data) {
+    if (profile) {
       profileForm.reset({
-        name: profile.data.name ?? "",
-        email: profile.data.email ?? "",
+        name: profile.name ?? "",
+        email: profile.email ?? "",
       });
     }
   }, [profile, profileForm]);
@@ -65,8 +65,8 @@ export default function ProfilePage() {
   const updateMutation = usePutApiUser({
     mutation: {
       onSuccess: (response) => {
-        if (response.data?.name) {
-          updateUserName(response.data.name);
+        if (response?.name) {
+          updateUserName(response.name);
         }
         toast.success("Perfil atualizado com sucesso!");
       },

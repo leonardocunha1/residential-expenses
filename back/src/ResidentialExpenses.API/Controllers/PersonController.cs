@@ -13,29 +13,29 @@ namespace ResidentialExpenses.API.Controllers;
 public class PersonController : ResidentialExpensesBaseController
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseApiJson<ResponseRegisteredPersonJson>), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ResponseApiJson<object>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseRegisteredPersonJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
         [FromServices] IRegisterPersonUseCase useCase,
         [FromBody] RequestRegisterPersonJson request)
     {
         var result = await useCase.Execute(request);
-        return SuccessCreated(result);
+        return Created(string.Empty, result);
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(ResponseApiJson<List<ResponseShortPersonJson>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<ResponseShortPersonJson>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll(
         [FromServices] IGetAllPeopleUseCase useCase)
     {
         var result = await useCase.Execute();
-        return SuccessOk(result);
+        return Ok(result);
     }
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(typeof(ResponseApiJson<object>), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ResponseApiJson<object>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update(
         [FromServices] IUpdatePersonUseCase useCase,
         [FromRoute] long id,
@@ -47,7 +47,7 @@ public class PersonController : ResidentialExpensesBaseController
 
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(typeof(ResponseApiJson<object>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(
         [FromServices] IDeletePersonUseCase useCase,
         [FromRoute] long id)

@@ -8,8 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function getApiErrorMessages(error: unknown, fallback: string): string {
   if (isAxiosError(error)) {
-    const messages: string[] | undefined =
-      error.response?.data?.errors ?? error.response?.data?.errorMessages;
+    const messages: string[] | undefined = error.response?.data?.errors;
     if (messages?.length) {
       return messages.join('\n');
     }

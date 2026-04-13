@@ -40,8 +40,7 @@ export default function PersonsPage() {
     useState<ResponseShortPersonJson | null>(null);
 
   const { data: personsResponse, isLoading } = useGetApiPerson();
-  const persons = personsResponse?.data ?? EMPTY_PERSONS;
-  console.log('Persons:', persons);
+  const persons = personsResponse ?? EMPTY_PERSONS;
 
   const invalidatePersons = () =>
     queryClient.invalidateQueries({ queryKey: getGetApiPersonQueryKey() });

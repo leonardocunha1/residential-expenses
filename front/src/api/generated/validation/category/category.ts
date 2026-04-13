@@ -12,18 +12,10 @@ export const ValidatepostApiCategoryBody = zod.object({
   "purpose": zod.number()
 })
 
-export const ValidategetApiCategoryResponse = zod.object({
-  "success": zod.boolean().optional(),
-  "data": zod.array(zod.object({
+export const ValidategetApiCategoryResponseItem = zod.object({
   "id": zod.number().optional(),
   "description": zod.string().optional(),
   "purpose": zod.number().optional()
-})).nullish(),
-  "errors": zod.array(zod.string()).optional(),
-  "metadata": zod.object({
-  "page": zod.number().nullish(),
-  "pageSize": zod.number().nullish(),
-  "totalCount": zod.number().nullish()
-}).optional()
 })
+export const ValidategetApiCategoryResponse = zod.array(ValidategetApiCategoryResponseItem)
 

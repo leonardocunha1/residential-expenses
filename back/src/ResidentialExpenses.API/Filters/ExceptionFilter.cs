@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using ResidentialExpenses.Communication.Responses;
 using ResidentialExpenses.Exceptions;
 using ResidentialExpenses.Exceptions.ExceptionsBase;
 
@@ -10,40 +9,52 @@ public class ExceptionFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {
-        if (context.Exception is ResidentialExpensesException)
+        if (context.Exception is ResidentialExpensesException residentialExpensesException)
         {
-            HandleProjectException(context);
+            HandleProjectException(context, residentialExpensesException);
         }
         else
         {
             ThrowUnknowError(context);
         }
-
     }
 
-    private void HandleProjectException(ExceptionContext context)
+    private static void HandleProjectException(ExceptionContext context, ResidentialExpensesException exception)
     {
-        var residentialExpensesException = (ResidentialExpensesException)context.Exception;
-        context.HttpContext.Response.StatusCode = residentialExpensesException.StatusCode;
-        context.Result = new ObjectResult(CreateErrorEnvelope(residentialExpensesException.GetErrors()));
+        context.HttpContext.Response.StatusCode = exception.StatusCode;
+        context.Result = new ObjectResult(CreateProblem(exception.StatusCode, exception.GetErrors()));
         context.ExceptionHandled = true;
     }
 
-    private void ThrowUnknowError(ExceptionContext context)
+    private static void ThrowUnknowError(ExceptionContext context)
     {
         context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
-        context.Result = new ObjectResult(CreateErrorEnvelope([ResourceErrorMessages.UNKNOW_ERROR]));
+        context.Result = new ObjectResult(CreateProblem(StatusCodes.Status500InternalServerError, [ResourceErrorMessages.UNKNOW_ERROR]));
         context.ExceptionHandled = true;
     }
 
-    private static ResponseApiJson<object?> CreateErrorEnvelope(List<string> errors)
+    private static ProblemDetails CreateProblem(int statusCode, List<string> errors)
     {
-        return new ResponseApiJson<object?>
+        var problem = new ProblemDetails
         {
-            Success = false,
-            Data = null,
-            Errors = errors,
-            Metadata = new ResponseMetadataJson()
+            Status = statusCode,
+            Title = ReasonPhrases.Get(statusCode),
         };
+        problem.Extensions["errors"] = errors;
+        return problem;
     }
+}
+
+internal static class ReasonPhrases
+{
+    public static string Get(int statusCode) => statusCode switch
+    {
+        StatusCodes.Status400BadRequest => "Bad Request",
+        StatusCodes.Status401Unauthorized => "Unauthorized",
+        StatusCodes.Status403Forbidden => "Forbidden",
+        StatusCodes.Status404NotFound => "Not Found",
+        StatusCodes.Status409Conflict => "Conflict",
+        StatusCodes.Status500InternalServerError => "Internal Server Error",
+        _ => "Error",
+    };
 }
