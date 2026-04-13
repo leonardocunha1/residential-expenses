@@ -49,8 +49,8 @@ export default function TransactionsPage() {
 
   const { data: personsResponse } = useGetApiPerson();
   const { data: categoriesResponse } = useGetApiCategory();
-  const persons = personsResponse?.data ?? EMPTY_PERSONS;
-  const categories = categoriesResponse?.data ?? EMPTY_CATEGORIES;
+  const persons = personsResponse ?? EMPTY_PERSONS;
+  const categories = categoriesResponse ?? EMPTY_CATEGORIES;
 
   const categoryMap = useMemo(() => {
     const map = new Map<number, string>();
@@ -65,9 +65,10 @@ export default function TransactionsPage() {
       query: { enabled: selectedPersonId != null },
     });
   const transactions = useMemo(() => {
-    const data = transactionsResponse?.data;
-    return Array.isArray(data) ? data : EMPTY_TRANSACTIONS;
-  }, [transactionsResponse?.data]);
+    return Array.isArray(transactionsResponse)
+      ? transactionsResponse
+      : EMPTY_TRANSACTIONS;
+  }, [transactionsResponse]);
 
   const createMutation = usePostApiTransaction({
     mutation: {

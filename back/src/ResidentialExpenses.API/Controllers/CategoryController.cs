@@ -11,22 +11,22 @@ namespace ResidentialExpenses.API.Controllers;
 public class CategoryController : ResidentialExpensesBaseController
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseApiJson<ResponseRegisteredCategoryJson>), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ResponseApiJson<object>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseRegisteredCategoryJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
         [FromServices] IRegisterCategoryUseCase useCase,
         [FromBody] RequestRegisterCategoryJson request)
     {
         var result = await useCase.Execute(request);
-        return SuccessCreated(result);
+        return Created(string.Empty, result);
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(ResponseApiJson<List<ResponseShortCategoryJson>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<ResponseShortCategoryJson>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll(
         [FromServices] IGetAllCategoriesUseCase useCase)
     {
         var result = await useCase.Execute();
-        return SuccessOk(result);
+        return Ok(result);
     }
 }

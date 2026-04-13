@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using ResidentialExpenses.API.Attributes;
 using ResidentialExpenses.Application.UseCases.Users.Delete;
 using ResidentialExpenses.Application.UseCases.Users.Profile;
@@ -12,42 +12,44 @@ namespace ResidentialExpenses.API.Controllers;
 public class UserController : ResidentialExpensesBaseController
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseApiJson<ResponseRegisteredUserJson>), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
         [FromServices] IRegisterUserUseCase useCase,
         [FromBody] RequestRegisterUserJson request)
     {
         var result = await useCase.Execute(request);
-        return SuccessCreated(result);
+        return Created(string.Empty, result);
     }
 
     [HttpGet]
     [AuthenticatedUser]
-    [ProducesResponseType(typeof(ResponseApiJson<ResponseUserProfileJson>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> GetProfile(
         [FromServices] IGetUserProfileUseCase useCase)
     {
         var result = await useCase.Execute();
-        return SuccessOk(result);
+        return Ok(result);
     }
 
     [HttpPut]
     [AuthenticatedUser]
-    [ProducesResponseType(typeof(ResponseApiJson<ResponseUserProfileJson>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ResponseApiJson<object>), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ResponseApiJson<object>), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Update(
         [FromServices] IUpdateUserUseCase useCase,
         [FromBody] RequestUpdateUserJson request)
     {
         var result = await useCase.Execute(request);
-        return SuccessOk(result);
+        return Ok(result);
     }
 
     [HttpDelete]
     [AuthenticatedUser]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(typeof(ResponseApiJson<object>), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Delete(
         [FromServices] IDeleteUserUseCase useCase)
     {

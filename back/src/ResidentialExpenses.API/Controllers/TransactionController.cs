@@ -12,34 +12,34 @@ namespace ResidentialExpenses.API.Controllers;
 public class TransactionController : ResidentialExpensesBaseController
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseApiJson<ResponseRegisteredTransactionJson>), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ResponseApiJson<object>), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ResponseApiJson<object>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseRegisteredTransactionJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Register(
         [FromServices] IRegisterTransactionUseCase useCase,
         [FromBody] RequestRegisterTransactionJson request)
     {
         var result = await useCase.Execute(request);
-        return SuccessCreated(result);
+        return Created(string.Empty, result);
     }
 
     [HttpGet("person/{personId}")]
-    [ProducesResponseType(typeof(ResponseApiJson<List<ResponseShortTransactionJson>>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ResponseApiJson<object>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(List<ResponseShortTransactionJson>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllByPerson(
         [FromServices] IGetAllTransactionsUseCase useCase,
         [FromRoute] long personId)
     {
         var result = await useCase.Execute(personId);
-        return SuccessOk(result);
+        return Ok(result);
     }
 
     [HttpGet("totals")]
-    [ProducesResponseType(typeof(ResponseApiJson<ResponseTotalsSummaryJson>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseTotalsSummaryJson), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetTotalsByPerson(
         [FromServices] IGetTotalsByPersonUseCase useCase)
     {
         var result = await useCase.Execute();
-        return SuccessOk(result);
+        return Ok(result);
     }
 }

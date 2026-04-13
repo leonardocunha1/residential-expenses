@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
-using ResidentialExpenses.Communication.Responses;
 using ResidentialExpenses.Domain.Repositories.User;
 using ResidentialExpenses.Domain.Security.Tokens;
 using ResidentialExpenses.Exceptions;
@@ -36,27 +35,31 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
         }
         catch (SecurityTokenExpiredException)
         {
-            context.Result = new UnauthorizedObjectResult(CreateErrorEnvelope(ResourceErrorMessages.TOKEN_EXPIRED));
+            context.Result = new UnauthorizedObjectResult(CreateProblem(ResourceErrorMessages.TOKEN_EXPIRED, tokenIsExpired: true));
         }
         catch (ResidentialExpensesException ex)
         {
-            context.Result = new UnauthorizedObjectResult(CreateErrorEnvelope(ex.Message));
+            context.Result = new UnauthorizedObjectResult(CreateProblem(ex.Message));
         }
         catch
         {
-            context.Result = new UnauthorizedObjectResult(CreateErrorEnvelope(ResourceErrorMessages.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE));
+            context.Result = new UnauthorizedObjectResult(CreateProblem(ResourceErrorMessages.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE));
         }
     }
 
-    private static ResponseApiJson<object?> CreateErrorEnvelope(string error)
+    private static ProblemDetails CreateProblem(string error, bool tokenIsExpired = false)
     {
-        return new ResponseApiJson<object?>
+        var problem = new ProblemDetails
         {
-            Success = false,
-            Data = null,
-            Errors = [error],
-            Metadata = new ResponseMetadataJson()
+            Status = StatusCodes.Status401Unauthorized,
+            Title = "Unauthorized",
         };
+        problem.Extensions["errors"] = new List<string> { error };
+        if (tokenIsExpired)
+        {
+            problem.Extensions["tokenIsExpired"] = true;
+        }
+        return problem;
     }
 
     private static string TokenOnRequest(AuthorizationFilterContext context)

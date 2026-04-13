@@ -48,7 +48,7 @@ export default function CategoriesPage() {
   const [formOpen, setFormOpen] = useState(false);
 
   const { data: categoriesResponse, isLoading } = useGetApiCategory();
-  const categories = categoriesResponse?.data ?? EMPTY_CATEGORIES;
+  const categories = categoriesResponse ?? EMPTY_CATEGORIES;
 
   const createMutation = usePostApiCategory({
     mutation: {
