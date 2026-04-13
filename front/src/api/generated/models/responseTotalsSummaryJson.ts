@@ -6,12 +6,9 @@
  */
 import type { ResponsePersonTotalsJson } from './responsePersonTotalsJson';
 
-/**
- * @nullable
- */
-export type ResponseTotalsSummaryJson = {
+export interface ResponseTotalsSummaryJson {
   people?: ResponsePersonTotalsJson[];
   totalIncome?: number;
   totalExpense?: number;
   balance?: number;
-} | null;
+}

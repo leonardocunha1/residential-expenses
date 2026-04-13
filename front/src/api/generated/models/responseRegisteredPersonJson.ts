@@ -5,11 +5,8 @@
  * OpenAPI spec version: 1.0.0
  */
 
-/**
- * @nullable
- */
-export type ResponseRegisteredPersonJson = {
+export interface ResponseRegisteredPersonJson {
   id?: number;
   name?: string;
   age?: number;
-} | null;
+}

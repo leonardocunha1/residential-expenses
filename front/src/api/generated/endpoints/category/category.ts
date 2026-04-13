@@ -29,10 +29,10 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ProblemDetails,
   RequestRegisterCategoryJson,
-  ResponseApiJsonOfListOfResponseShortCategoryJson,
-  ResponseApiJsonOfObject,
-  ResponseApiJsonOfResponseRegisteredCategoryJson
+  ResponseRegisteredCategoryJson,
+  ResponseShortCategoryJson
 } from '../../models';
 
 import { axiosInstance } from '../../../http/axios-instance';
@@ -50,9 +50,9 @@ export const getPostApiCategoryUrl = () => {
   return `/api/category`
 }
 
-export const postApiCategory = async (requestRegisterCategoryJson: RequestRegisterCategoryJson, options?: RequestInit): Promise<ResponseApiJsonOfResponseRegisteredCategoryJson> => {
+export const postApiCategory = async (requestRegisterCategoryJson: RequestRegisterCategoryJson, options?: RequestInit): Promise<ResponseRegisteredCategoryJson> => {
 
-  return axiosInstance<ResponseApiJsonOfResponseRegisteredCategoryJson>(getPostApiCategoryUrl(),
+  return axiosInstance<ResponseRegisteredCategoryJson>(getPostApiCategoryUrl(),
   {
     ...options,
     method: 'POST',
@@ -65,7 +65,7 @@ export const postApiCategory = async (requestRegisterCategoryJson: RequestRegist
 
 
 
-export const getPostApiCategoryMutationOptions = <TError = ResponseApiJsonOfObject,
+export const getPostApiCategoryMutationOptions = <TError = ProblemDetails,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiCategory>>, TError,{data: RequestRegisterCategoryJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
 ): UseMutationOptions<Awaited<ReturnType<typeof postApiCategory>>, TError,{data: RequestRegisterCategoryJson}, TContext> => {
 
@@ -94,9 +94,9 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type PostApiCategoryMutationResult = NonNullable<Awaited<ReturnType<typeof postApiCategory>>>
     export type PostApiCategoryMutationBody = RequestRegisterCategoryJson
-    export type PostApiCategoryMutationError = ResponseApiJsonOfObject
+    export type PostApiCategoryMutationError = ProblemDetails
 
-    export const usePostApiCategory = <TError = ResponseApiJsonOfObject,
+    export const usePostApiCategory = <TError = ProblemDetails,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiCategory>>, TError,{data: RequestRegisterCategoryJson}, TContext>, request?: SecondParameter<typeof axiosInstance>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postApiCategory>>,
@@ -114,9 +114,9 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return `/api/category`
 }
 
-export const getApiCategory = async ( options?: RequestInit): Promise<ResponseApiJsonOfListOfResponseShortCategoryJson> => {
+export const getApiCategory = async ( options?: RequestInit): Promise<ResponseShortCategoryJson[]> => {
 
-  return axiosInstance<ResponseApiJsonOfListOfResponseShortCategoryJson>(getGetApiCategoryUrl(),
+  return axiosInstance<ResponseShortCategoryJson[]>(getGetApiCategoryUrl(),
   {
     ...options,
     method: 'GET'

@@ -6,6 +6,7 @@
  */
 
 export * from './categoryPurposeJson';
+export * from './problemDetails';
 export * from './requestLoginJson';
 export * from './requestRegisterCategoryJson';
 export * from './requestRegisterPersonJson';
@@ -13,17 +14,6 @@ export * from './requestRegisterTransactionJson';
 export * from './requestRegisterUserJson';
 export * from './requestUpdatePersonJson';
 export * from './requestUpdateUserJson';
-export * from './responseApiJsonOfListOfResponseShortCategoryJson';
-export * from './responseApiJsonOfListOfResponseShortPersonJson';
-export * from './responseApiJsonOfListOfResponseShortTransactionJson';
-export * from './responseApiJsonOfObject';
-export * from './responseApiJsonOfResponseRegisteredCategoryJson';
-export * from './responseApiJsonOfResponseRegisteredPersonJson';
-export * from './responseApiJsonOfResponseRegisteredTransactionJson';
-export * from './responseApiJsonOfResponseRegisteredUserJson';
-export * from './responseApiJsonOfResponseTotalsSummaryJson';
-export * from './responseApiJsonOfResponseUserProfileJson';
-export * from './responseMetadataJson';
 export * from './responsePersonTotalsJson';
 export * from './responseRegisteredCategoryJson';
 export * from './responseRegisteredPersonJson';

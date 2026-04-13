@@ -6,10 +6,7 @@
  */
 import type { ResponseTokensJson } from './responseTokensJson';
 
-/**
- * @nullable
- */
-export type ResponseRegisteredUserJson = {
+export interface ResponseRegisteredUserJson {
   name?: string;
   tokens?: ResponseTokensJson;
-} | null;
+}

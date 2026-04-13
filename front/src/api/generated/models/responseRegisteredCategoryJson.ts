@@ -6,11 +6,8 @@
  */
 import type { CategoryPurposeJson } from './categoryPurposeJson';
 
-/**
- * @nullable
- */
-export type ResponseRegisteredCategoryJson = {
+export interface ResponseRegisteredCategoryJson {
   id?: number;
   description?: string;
   purpose?: CategoryPurposeJson;
-} | null;
+}
